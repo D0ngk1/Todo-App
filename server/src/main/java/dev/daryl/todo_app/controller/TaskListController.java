@@ -30,7 +30,7 @@ public class TaskListController {
     //Dependecy Injection
     public TaskListController(CollectionRepository repository, TaskListRepository taskListRepository){
         this.repository = repository;
-        this.taskListRepository=taskListRepository;
+        this.taskListRepository = taskListRepository;
     }
     //Return all records without Database
     @GetMapping("")    
@@ -151,7 +151,7 @@ public class TaskListController {
     }
 
 
-
+    //**************************** Delete TaskList
     @DeleteMapping("/sql/{id}")
     public ResponseEntity<HttpStatus>delete(@PathVariable Long id){
         try {

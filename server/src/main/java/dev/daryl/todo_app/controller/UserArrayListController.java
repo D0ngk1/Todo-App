@@ -33,7 +33,9 @@ public class UserArrayListController {
         }
     }
 
-    //Login
+
+
+    //**************** Login
     @GetMapping("/login/{userName}/{password}")
     public ResponseEntity<Users> login(@PathVariable String userName,@PathVariable String password){
         try{
@@ -43,13 +45,12 @@ public class UserArrayListController {
                     return new ResponseEntity<>(findUser,HttpStatus.ACCEPTED);
                 }
             }
-            return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }catch (Exception e){
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    //Update Users
 
     //**************** Create Users
     @PostMapping("")

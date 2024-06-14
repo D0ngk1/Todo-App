@@ -1,14 +1,30 @@
 package dev.daryl.todo_app.model;
 
+
+import jakarta.persistence.*;
+
+@Entity(name="Users")
+@Table(name="Users")
 public class Users {
+    @Id
+    @SequenceGenerator(
+            name="user_sequence",
+            sequenceName = "user_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "user_sequence"
+    )
     private Long id;
     private String userName;
     private String password;
     private Integer invalidAttempt;
     private Boolean isLocked;
+    public Users(){
 
-    public Users(Long id, String userName, Integer invalidAttempt, Boolean isLocked, String password) {
-        this.id = id;
+    }
+    public Users(String userName, Integer invalidAttempt, Boolean isLocked, String password) {
         this.userName = userName;
         this.invalidAttempt = invalidAttempt;
         this.isLocked = isLocked;
