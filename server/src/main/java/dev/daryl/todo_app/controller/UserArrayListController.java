@@ -21,7 +21,6 @@ public class UserArrayListController {
     }
 
 
-
     //**************** Return all Users
     @GetMapping("")
     public ResponseEntity<List<Users>> viewAllUsers(){

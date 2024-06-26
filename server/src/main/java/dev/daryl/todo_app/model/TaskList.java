@@ -1,11 +1,6 @@
 package dev.daryl.todo_app.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -23,15 +18,30 @@ public class TaskList {
         generator = "tl_sequence"
     )
     private Long id;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "uid")
+    private ApplicationUser user;
+
     private String title;
     private String description;
     private Type type;
     private LocalDateTime dateCreated;
 
-    public TaskList() {
+    public void setUser(ApplicationUser user) {
         // Default constructor for JPA
+        this.user = user;
     }
-    public TaskList(String title, String description, Type type, LocalDateTime dateCreated) {
+    public TaskList(){}
+
+   /* public TaskList(String title, String description, Type type, LocalDateTime dateCreated) {
+        this.title = title;
+        this.description = description;
+        this.type = type;
+        this.dateCreated = dateCreated;
+    }*/
+    public TaskList(ApplicationUser user,String title, String description, Type type, LocalDateTime dateCreated) {
+        this.user = user;
         this.title = title;
         this.description = description;
         this.type = type;
@@ -39,7 +49,9 @@ public class TaskList {
     }
 
     // Getters and setters
-
+    public long getUid(){
+        return this.user.getUserId();
+    }
     public Long getId() {
         return id;
     }

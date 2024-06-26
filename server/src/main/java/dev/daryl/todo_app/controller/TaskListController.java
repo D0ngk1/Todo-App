@@ -1,6 +1,11 @@
 package dev.daryl.todo_app.controller;
 
-import org.springframework.scheduling.config.Task;
+import dev.daryl.todo_app.DTO.TaskListDTO;
+import dev.daryl.todo_app.model.ApplicationUser;
+import dev.daryl.todo_app.repository.UserRepository;
+import dev.daryl.todo_app.service.AuthenticationService;
+import dev.daryl.todo_app.service.TaskListService;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -22,35 +27,37 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
+@EnableWebSecurity
 @RequestMapping("/api/content")
 public class TaskListController {
     private final CollectionRepository repository;
     private final TaskListRepository taskListRepository;
+    private final TaskListService taskListService;
+    private final AuthenticationService authenticationService;
 
     //Dependecy Injection
-    public TaskListController(CollectionRepository repository, TaskListRepository taskListRepository){
+    public TaskListController(CollectionRepository repository, TaskListRepository taskListRepository, TaskListService taskListService, AuthenticationService authenticationService){
         this.repository = repository;
         this.taskListRepository = taskListRepository;
+        this.taskListService = taskListService;
+        this.authenticationService = authenticationService;
+
     }
     //Return all records without Database
     @GetMapping("")    
     public List<TaskList> findAll(){
         return repository.findAll();
     }
-    //Return all records with Database
+    //*************************** Return all records with Database
     @SuppressWarnings("null")
     @GetMapping("/sql")    
-    public ResponseEntity<List<TaskList>> getAllTaskList(){
+    public ResponseEntity<List<TaskListDTO>> getAllTaskList(){
         try {
-            List <TaskList> taskLists = new ArrayList<TaskList>();
             //Returns all records
-            taskListRepository.findAll().forEach(taskLists::add);
-
-
+            List<TaskListDTO> taskLists = new ArrayList<TaskListDTO>(taskListService.getAllTaskLists());
             if (taskLists.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
               }
-
             //Return HttpStatus OK
             return new ResponseEntity<>(taskLists,HttpStatus.OK);
 
@@ -67,6 +74,23 @@ public class TaskListController {
        try {
             List<TaskList> taskLists = taskListRepository.findByType(type);
             return new ResponseEntity<>(taskLists,HttpStatus.OK);
+        } catch (Exception e) {
+            // handle exceptions
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    //**************************** Return records by Types and User
+    @GetMapping("/type/{type}/{uid}")
+    public ResponseEntity<List<TaskList>> findByTypesAndUid(@PathVariable Type type,@PathVariable Integer uid) {
+        try {
+            Optional<ApplicationUser> userOptional = authenticationService.findbyId(uid);
+            if (userOptional.isPresent()) {
+                ApplicationUser user = userOptional.get();
+                List<TaskList> taskLists = taskListRepository.findByTypeAndUser(type, user);
+                return new ResponseEntity<>(taskLists, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.NOT_MODIFIED);
+            }
         } catch (Exception e) {
             // handle exceptions
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -98,7 +122,8 @@ public class TaskListController {
     public void create(@RequestBody TaskList content){
         repository.save(content);
     }
-    //Create a record with the Database using query parameters
+    //********* Create a record with the Database using query parameters
+    /*
     @SuppressWarnings("null")
     @PostMapping("/param")
     public ResponseEntity<TaskList> addTaskList(            
@@ -112,17 +137,27 @@ public class TaskListController {
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
     // Create a record with the Database using RequestBody
     @PostMapping("/json")
     public ResponseEntity<TaskList> addTaskListWithBody(@RequestBody TaskList content) {
         try {
-            TaskList _taskList = taskListRepository.save(new TaskList(content.getTitle(), content.getDescription(), content.getType(), content.getDateCreated()));
-            return new ResponseEntity<>(_taskList, HttpStatus.CREATED);
+            TaskList _taskList = taskListRepository.save(content);
+            return new ResponseEntity<>(content, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    /*@PostMapping("/json/dto")
+    public TaskListDTO addTaskListWithBodyDTO(@RequestBody TaskList content) {
+        try {
+            //TaskListDTO _taskList = taskListRepository.save(content);
+            return new TaskListDTO(taskListRepository.save(content));
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }*/
+
 
 
 

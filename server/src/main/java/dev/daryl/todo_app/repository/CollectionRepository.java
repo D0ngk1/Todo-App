@@ -31,7 +31,7 @@ public class CollectionRepository {
         contentList.set(id-1, content);
     }
     
-    //Initialization of first Object
+    /*//Initialization of first Object
     @PostConstruct
     private void init() {
         TaskList content = new TaskList(
@@ -44,5 +44,5 @@ public class CollectionRepository {
     }
     public void delete(Integer id) {
         contentList.removeIf(c -> c.getId().equals(id));
-    }
+    }*/
 }

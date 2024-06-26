@@ -1,11 +1,14 @@
 package dev.daryl.todo_app.controller;
 
+/*
 import dev.daryl.todo_app.model.TaskList;
 import dev.daryl.todo_app.model.Users;
 import dev.daryl.todo_app.repository.UserRepository;
+import dev.daryl.todo_app.service.TaskListService;
 import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -14,13 +17,17 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
+@CrossOrigin(origins = "http://localhost:4200")
+@EnableWebSecurity*/
 public class UserController {
+    /*
     private final UserRepository userRepo;
-
+    private final TaskListService taskListService;
 
     //Dependency Injection
-    public UserController(UserRepository userRepo) {
+    public UserController(UserRepository userRepo, TaskListService taskListService) {
         this.userRepo = userRepo;
+        this.taskListService = taskListService;
     }
     //***************** Get all users
     @GetMapping("")
@@ -48,13 +55,12 @@ public class UserController {
         }catch (Exception e){
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }*/
+    }
     //***************** Login
     @GetMapping("/login/{userName}/{password}")
     public ResponseEntity<Users> login(@PathVariable String userName, @PathVariable String password){
         try{
-            List <Users> users = userRepo.findByUserName(userName);
-            Users user = users.get(0);
+            Users user = taskListService.login(userName,password);
             if(user != null) {
                 if (user.getPassword().equals(password)) {
                     return new ResponseEntity<>(user, HttpStatus.OK);
@@ -103,6 +109,6 @@ public class UserController {
         }catch (Exception e){
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
 
 }
