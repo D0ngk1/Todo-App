@@ -35,11 +35,15 @@ public class AuthenticationService {
 
     public ApplicationUser registerUser(String username,String password){
         String encodedPassword = passwordEncoder.encode(password);
+
+        Optional<Role> roleUser = roleRepository.findByAuthority("USER");
+
+        if (!roleUser.isPresent()) { roleRepository.save(new Role("USER")); }
         Role userRole = roleRepository.findByAuthority("USER").get();
         Set<Role> authorities = new HashSet<>();
         authorities.add(userRole);
 
-        return userRepository.save(new ApplicationUser(0,username,encodedPassword,authorities));
+        return userRepository.save(new ApplicationUser(null,username,encodedPassword,authorities));
     }
     public Optional<ApplicationUser> findbyId(Integer uid){
         return userRepository.findByUserId(uid);

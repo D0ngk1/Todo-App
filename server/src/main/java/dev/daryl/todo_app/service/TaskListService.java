@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import dev.daryl.todo_app.DTO.TaskListDTO;
+import dev.daryl.todo_app.DTO.TaskListDTOMapper;
 import dev.daryl.todo_app.model.*;
 import dev.daryl.todo_app.repository.RoleRepository;
 import dev.daryl.todo_app.repository.UserRepository;
@@ -20,48 +21,43 @@ import jakarta.annotation.PostConstruct;
 public class TaskListService {
 
     private final TaskListRepository taskListRepository;
-    private final UserRepository userRepo;
     private final AuthenticationService authenticationService;
-    private final RoleRepository roleRepository;
-
+    private final TaskListDTOMapper taskListDTOMapper;
 
     public TaskListService(TaskListRepository taskListRepository,
-                           UserRepository userRepo, AuthenticationService authenticationService, RoleRepository roleRepository){
+                           UserRepository userRepo, AuthenticationService authenticationService, RoleRepository roleRepository, TaskListDTOMapper taskListDTOMapper){
         this.taskListRepository = taskListRepository;
-        this.userRepo = userRepo;
         this.authenticationService = authenticationService;
-        this.roleRepository = roleRepository;
+        this.taskListDTOMapper = taskListDTOMapper;
     }
 
     //get all tasklists
     public List<TaskListDTO> getAllTaskLists(){
         return taskListRepository.findAll()
                 .stream()
-                .map(taskList -> new TaskListDTO(
-                        taskList.getTitle(),
-                        taskList.getDescription(),
-                        taskList.getType(),
-                        taskList.getDateCreated(),
-                        taskList.getUid()
-                )).collect(Collectors.toList());
+                .map(taskListDTOMapper).collect(Collectors.toList());
     }
 
 
     @PostConstruct
     public void init(){
-        Optional<Role> roleUser = roleRepository.findByAuthority("USER");
-        if (!roleUser.isPresent()) roleRepository.save(new Role("USER"));
-        ApplicationUser user1 = authenticationService.registerUser(
-                "userName1",
-                "wew123123"
+
+         authenticationService.registerUser(
+                "daryl",
+                "bhadz_01"
         );
         ApplicationUser user2 = authenticationService.registerUser(
-                "userName",
+                "asdf",
                 "wew123123"
         );
-
-        ApplicationUser savedUser1 = userRepo.save(user1);
-        ApplicationUser savedUser2 = userRepo.save(user2);
+        ApplicationUser user1 =  authenticationService.registerUser(
+                "asdf23423",
+                "wew123123"
+        );
+        authenticationService.registerUser(
+                "dgdfgdfgdfg",
+                "wew123123"
+        );
         TaskList taskList = new TaskList(
                 user1,
                 "Initial Task   Title",

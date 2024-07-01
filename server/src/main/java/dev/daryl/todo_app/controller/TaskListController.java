@@ -2,7 +2,6 @@ package dev.daryl.todo_app.controller;
 
 import dev.daryl.todo_app.DTO.TaskListDTO;
 import dev.daryl.todo_app.model.ApplicationUser;
-import dev.daryl.todo_app.repository.UserRepository;
 import dev.daryl.todo_app.service.AuthenticationService;
 import dev.daryl.todo_app.service.TaskListService;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -13,8 +12,6 @@ import dev.daryl.todo_app.repository.CollectionRepository;
 import dev.daryl.todo_app.repository.TaskListRepository;
 import dev.daryl.todo_app.model.TaskList;
 import dev.daryl.todo_app.model.Type;
-
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -96,7 +93,25 @@ public class TaskListController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
+    //**************************** Create a record with the Database using RequestBody
+    @PostMapping("/json")
+    public ResponseEntity<TaskList> addTaskListWithBody(@RequestBody TaskList content) {
+        try {
+            //**************************** Fetch the user from the database using the userId
+            Integer uid = Math.toIntExact(content.getUid());
+            ApplicationUser user = authenticationService.findbyId(uid)
+                    .orElseThrow(() -> new RuntimeException("User not found"));
+
+            // Set the fetched user to the task list
+            content.setUser(user);
+            TaskList _taskList = taskListRepository.save(content);
+            return new ResponseEntity<>(content, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     //**************************** Find by id without Database
     @GetMapping("/{id}")
     public Optional<TaskList> findById(@PathVariable Integer id){
@@ -107,6 +122,7 @@ public class TaskListController {
     @GetMapping("/sql/{id}")
     public ResponseEntity<List<TaskList>> getId(@PathVariable Integer id) {
         try {
+
             List<TaskList> taskList = taskListRepository.findById(id);
             return new ResponseEntity<>(taskList,HttpStatus.OK);
         } catch (Exception e) {
@@ -114,7 +130,7 @@ public class TaskListController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
 
     //Create a record without the Database
     @ResponseStatus(HttpStatus.CREATED)
@@ -134,25 +150,6 @@ public class TaskListController {
         try {
             TaskList _taskList = taskListRepository.save(new TaskList(title, description, type, dateCreated));
             return new ResponseEntity<>(_taskList, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }*/
-    // Create a record with the Database using RequestBody
-    @PostMapping("/json")
-    public ResponseEntity<TaskList> addTaskListWithBody(@RequestBody TaskList content) {
-        try {
-            TaskList _taskList = taskListRepository.save(content);
-            return new ResponseEntity<>(content, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    /*@PostMapping("/json/dto")
-    public TaskListDTO addTaskListWithBodyDTO(@RequestBody TaskList content) {
-        try {
-            //TaskListDTO _taskList = taskListRepository.save(content);
-            return new TaskListDTO(taskListRepository.save(content));
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
