@@ -1,5 +1,6 @@
 package dev.daryl.todo_app.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -27,6 +28,37 @@ public class TaskList {
     private String description;
     private Type type;
     private LocalDateTime dateCreated;
+    private LocalDateTime dueDate;
+
+    public Boolean getDone() {
+        return isDone;
+    }
+
+    public void setDone(Boolean done) {
+        isDone = done;
+    }
+
+    public Boolean getImportant() {
+        return isImportant;
+    }
+
+    public void setImportant(Boolean important) {
+        isImportant = important;
+    }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+    @JsonProperty("done")
+    private Boolean isDone;
+
+
+    @JsonProperty("important")
+    private Boolean isImportant;
 
     public void setUser(ApplicationUser user) {
         // Default constructor for JPA
@@ -34,18 +66,16 @@ public class TaskList {
     }
     public TaskList(){}
 
-   /* public TaskList(String title, String description, Type type, LocalDateTime dateCreated) {
-        this.title = title;
-        this.description = description;
-        this.type = type;
-        this.dateCreated = dateCreated;
-    }*/
-    public TaskList(ApplicationUser user,String title, String description, Type type, LocalDateTime dateCreated) {
+    public TaskList(Long id, ApplicationUser user, String title, Type type, String description, LocalDateTime dateCreated, LocalDateTime dueDate, Boolean isDone, Boolean isImportant) {
+        this.id = id;
         this.user = user;
         this.title = title;
-        this.description = description;
         this.type = type;
+        this.description = description;
         this.dateCreated = dateCreated;
+        this.dueDate = dueDate;
+        this.isDone = isDone;
+        this.isImportant = isImportant;
     }
 
     // Getters and setters

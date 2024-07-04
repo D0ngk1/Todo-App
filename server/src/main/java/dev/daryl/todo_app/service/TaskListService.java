@@ -37,8 +37,18 @@ public class TaskListService {
                 .stream()
                 .map(taskListDTOMapper).collect(Collectors.toList());
     }
+    public List<TaskListDTO> getAllTaskListsByUser(ApplicationUser user){
+        return taskListRepository.findByUser(user)
+                .stream()
+                .map(taskListDTOMapper).collect(Collectors.toList());
+    }
+    public List<TaskListDTO> getAllTaskListsByUserAndImportance(ApplicationUser user){
+        return taskListRepository.findByUserAndIsImportant(user, true)
+                .stream()
+                .map(taskListDTOMapper).collect(Collectors.toList());
+    }
 
-
+/*
     @PostConstruct
     public void init(){
 
@@ -74,7 +84,7 @@ public class TaskListService {
         );
         taskListRepository.save(taskList);
         taskListRepository.save(taskList1);
-    }
+    }*/
 
 
 }

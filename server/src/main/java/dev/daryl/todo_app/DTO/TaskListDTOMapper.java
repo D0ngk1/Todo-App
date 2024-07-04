@@ -10,10 +10,14 @@ public class TaskListDTOMapper  implements Function<TaskList, TaskListDTO> {
     @Override
     public TaskListDTO apply(TaskList taskList) {
         return new TaskListDTO(
+                taskList.getId(),
                 taskList.getTitle(),
                 taskList.getDescription(),
                 taskList.getType(),
                 taskList.getDateCreated(),
+                taskList.getDueDate(),
+                taskList.getDone(),
+                taskList.getImportant(),
                 taskList.getUid()
         );
     }

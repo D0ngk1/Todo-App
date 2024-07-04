@@ -64,7 +64,50 @@ public class TaskListController {
         }
 
     }
+    // Return records by users
+    @GetMapping("/sql/uid/{uid}")
+    public ResponseEntity<List<TaskListDTO>> getAllTaskListByUser(@PathVariable Integer uid){
+        try {
+            Optional<ApplicationUser> userOptional = authenticationService.findbyId(uid);
+            if (userOptional.isPresent()) {
+                ApplicationUser user = userOptional.get();
+                List<TaskListDTO> taskLists = new ArrayList<TaskListDTO>(taskListService.getAllTaskListsByUser(user));
+                if (taskLists.isEmpty()) {
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                }
+                //Return HttpStatus OK
+                return new ResponseEntity<>(taskLists, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
 
+        } catch (Exception e) {
+            // Handles exception
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+    // Return records by users and importance
+    @GetMapping("/sql/important/uid/{uid}")
+    public ResponseEntity<List<TaskListDTO>> getAllTaskListByUserAndImportance(@PathVariable Integer uid){
+        try {
+            Optional<ApplicationUser> userOptional = authenticationService.findbyId(uid);
+            if (userOptional.isPresent()) {
+                ApplicationUser user = userOptional.get();
+                List<TaskListDTO> taskLists = new ArrayList<TaskListDTO>(taskListService.getAllTaskListsByUserAndImportance(user));
+                if (taskLists.isEmpty()) {
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                }
+                //Return HttpStatus OK
+                return new ResponseEntity<>(taskLists, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+
+        } catch (Exception e) {
+            // Handles exception
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
     // Return records by Types
     @GetMapping("/type/{type}")
     public ResponseEntity<List<TaskList>> findByTypes(@PathVariable Type type) {
@@ -176,6 +219,10 @@ public class TaskListController {
             tList.setTitle(taskList.getTitle());
             tList.setDescription(taskList.getDescription());
             tList.setDateCreated(taskList.getDateCreated());
+            tList.setDone(taskList.getDone());
+            tList.setDueDate(taskList.getDueDate());
+            tList.setImportant(taskList.getImportant());
+            tList.setDueDate(taskList.getDueDate());
             return new ResponseEntity<>(taskListRepository.save(tList), HttpStatus.OK);
         }else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -15,4 +15,6 @@ public interface TaskListRepository extends JpaRepository<TaskList, Long>{
     List<TaskList> findById(Integer id);
     List<TaskList> findByType(Type type);
     List<TaskList> findByTypeAndUser(Type type, ApplicationUser user);
+    List<TaskList> findByUser(ApplicationUser user);
+    List<TaskList> findByUserAndIsImportant( ApplicationUser user,Boolean isImportant);
 }
