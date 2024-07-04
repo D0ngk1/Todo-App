@@ -1,0 +1,14 @@
+<div class="create-task-container">
+    <div>
+        <form >
+            <h1>{{ taskService.type }}</h1>
+            <label class="title"for="title">Title:</label><br>
+            <input type="text" id="title" name="title" [(ngModel)]="title"><br>
+            <label for="description" >Description:</label><br>
+            <textarea class="description" type="text" id="description" name="description" [(ngModel)]="description"> </textarea><br><br>
+            <p>{{ now }}</p>
+            <input type="submit" value="Create" (click)="add()">
+            <button class="cancel-btn" (click)="cancel()" *ngIf="taskService.showDialog">Cancel</button>
+        </form> 
+    </div>
+</div>

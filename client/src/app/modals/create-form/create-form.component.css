@@ -1,0 +1,22 @@
+.create-task-container{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+form{
+
+    opacity: 100%;
+    color: black;
+    box-shadow: 3px 3px 5px #fff;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 25px;
+}
+.description{
+    height: 40vh;
+    width: 60vw;
+}

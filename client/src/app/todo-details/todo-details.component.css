@@ -1,0 +1,51 @@
+
+.view-details {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 4;
+}
+.view-details-bg{
+    width: 40vw;
+    height: 70vh;
+    background-color: rgb(227, 204, 174);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.view-details-bg form {
+   width: 80%;
+   height: 100%;
+}
+.description{
+    height: 60%;
+    width: 98.5%;
+}
+.buttons{
+    width: 55%;
+    padding: auto;
+    margin: auto;
+    height: 9%;
+}
+.fbutton {
+    width: 48%;
+    background-color: white;
+    height: 92%;
+    margin: 2px;
+    border-radius: 5px;
+    border: solid 1px black;
+}
+.cancel-fbutton {
+    background-color: rgb(237, 150, 115);
+}
+.save-fbutton {
+    background-color: rgb(92, 146, 240);
+}
+

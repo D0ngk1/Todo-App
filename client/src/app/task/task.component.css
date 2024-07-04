@@ -1,0 +1,73 @@
+main{
+    /*border: solid black;
+    height: 200vw;*/
+    display: flex;
+    flex-wrap: initial;
+    height: auto;
+    font-family: sans-serif;
+    
+}
+.overview-main{
+    width: 100vw;
+    margin-left: 15%;
+    height: auto;
+}
+h1.type{
+    /*border: solid black; */
+    padding-left: 2%;
+    margin-top: 5px;
+}
+.task-lists {
+    height: fit-content;
+    width: auto;
+    padding-left: 4%;
+}
+div.add-task-div{
+    height: 40px;
+    display: flex;
+
+}
+.add-task-btn {
+    width: 10%;
+    height: 100%;
+    background-color: rgb(92, 146, 240);
+    border-radius: 5px;
+    border: black solid 1px;
+    cursor: pointer;
+
+}
+.item-lists{
+    margin: 10px;
+    background-color: rgb(227, 204, 174);
+    border-radius: 15px;
+}
+.notes {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.list-buttons{
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.note-title{
+    margin-left: 5%;
+}
+.note-date {
+    margin-right: 3%;
+}
+.display-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.buttons{
+
+    width: max-content;
+}

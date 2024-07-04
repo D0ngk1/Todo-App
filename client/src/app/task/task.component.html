@@ -1,0 +1,31 @@
+<main >
+    <app-create-form *ngIf="taskService.showDialog" ></app-create-form>
+    <app-todo-details *ngIf="taskService.showDetails" ></app-todo-details>
+    <!--<app-navigation (messageEvent)="receivedType($event)"></app-navigation> -->
+    <app-navigation></app-navigation>
+    <div class="overview-main">
+        <div>
+            <h1 class="type" >{{ taskService.type }} </h1>
+        </div>
+        <div class="task-lists">
+            <div class="add-task-div">
+                    <button class="add-task-btn" (click)="taskService.showDialog=true">
+                    <span>+</span>Add new {{taskService.type.toLowerCase()}}
+                    </button>
+            </div>
+            <div *ngFor="let item of data" class="item-lists">
+                <div class="display-list" >
+                    <div class="notes" (click)="viewNotes(item.id)">
+                        <h4 class="note-title">{{ item.title }}</h4>
+                        <p class="note-date">Date Created: {{ item.dateCreated }}</p>
+                    </div>
+                    <div class="list-buttons">
+                        <div class="buttons">
+                            <button (click)="delete(item.id)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+              </div>
+        </div>
+    </div>
+</main>
