@@ -26,10 +26,6 @@ export class ListComponent implements  OnDestroy {
       });
   }
 
-  /*ngOnInit(): void {
-    this.getContentsByType();
-  }*/
-
   ngOnDestroy(): void {
     if (this.routerSubscription) {
       this.routerSubscription.unsubscribe();

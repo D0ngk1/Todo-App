@@ -10,7 +10,7 @@ import { LoginResponse } from '../model/User';
 export class CurrentUserServiceService {
   private currentUsers = new BehaviorSubject< LoginResponse | null | undefined >(undefined);
   constructor(private http: HttpClient,private router: Router) { }
-
+  public firstLogin = true;
 
   setCurrentUser(loginObj:any){
     sessionStorage.clear();
@@ -21,6 +21,7 @@ export class CurrentUserServiceService {
         sessionStorage.setItem('users',loginResponse.user.username);
         sessionStorage.setItem('userId',loginResponse.user.userId);
         sessionStorage.setItem('loginToken',loginResponse.jwt);
+        this.firstLogin = true;
         this.router.navigateByUrl('/task');
       },error:(err) => {
         alert("Login error");
@@ -40,7 +41,6 @@ export class CurrentUserServiceService {
 
     // Clear current user
     this.currentUsers.next(null);
-
     // Navigate to login page
     this.router.navigateByUrl('/login');
   }

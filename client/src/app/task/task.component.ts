@@ -2,22 +2,24 @@ import { Component, OnInit, OnDestroy, numberAttribute } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TaskLists } from '../services/TasksLists';
-import { filter } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { CurrentUserServiceService } from '../services/current-user.service';
 
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.css']
 })
-export class TaskComponent implements OnDestroy {
+export class TaskComponent implements OnDestroy,OnInit {
   data: TaskLists[] = [];
   routerSubscription: Subscription;
 
   constructor(
     public taskService: TaskService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private currentUserService: CurrentUserServiceService
   ) {
     this.routerSubscription = this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
@@ -25,10 +27,14 @@ export class TaskComponent implements OnDestroy {
         this.getContentsByType();
       });
   }
-  /*
+
+  
   ngOnInit(): void {
-    this.getContentsByType();
-  }*/
+    if (this.currentUserService.firstLogin){
+      this.getContentsByType();
+      this.currentUserService.firstLogin = false;
+    }
+  }
 
   ngOnDestroy(): void {
     if (this.routerSubscription) {

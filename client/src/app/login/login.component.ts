@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit{
   }
   ngOnInit(): void {
 
-    this.currentUserSer.setCurrentUser(this.loginAuto);
+    //this.currentUserSer.setCurrentUser(this.loginAuto);
   }
 
   onLogin(){

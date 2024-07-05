@@ -48,6 +48,7 @@ div.add-task-div{
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+    height: 64px;
 }
 .list-buttons{
     width: 30%;
@@ -63,7 +64,7 @@ div.add-task-div{
     margin-right: 3%;
 }
 .display-list {
-    height: 10vh;
+    height: 65px;
     display: flex;
     align-items: center;
     justify-content: space-between;

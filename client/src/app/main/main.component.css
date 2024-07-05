@@ -1,0 +1,15 @@
+.main-container {
+    display: flex;
+    height: calc(100vh - 60px); /* Adjust 60px to match your top navigation height */
+}
+
+.navigation { /* Adjust as needed */
+    overflow-y: auto;
+}
+
+.content-area {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    min-height: 300px;
+}
