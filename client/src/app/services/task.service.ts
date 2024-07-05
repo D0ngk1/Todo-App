@@ -4,18 +4,20 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse, ITask } from '../model/Tasks';
 import { Router } from '@angular/router';
+import { CreateTaskLists } from '../model/User';
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
   apiUrl = "http://localhost:8080/api/content/";
   private data: TaskLists[]=[];
-  private selectedData: TaskLists[]=[];
+  //private selectedData: TaskLists[]=[];
   private filteredData: TaskLists[]=[];
   showDialog=false;
   showDetails=false;
   noteId:any;
   type = "TASK";
+  uid = sessionStorage.getItem('users');
 
   constructor (private http: HttpClient, router: Router){
 
@@ -47,16 +49,25 @@ export class TaskService {
   }
 
   //***************  POST API contents
-  createTaskList(task: TaskLists): Observable <ApiResponse<TaskLists>> {
+  createTaskList(task: CreateTaskLists): Observable <ApiResponse<TaskLists>> {
     return this.http.post<ApiResponse<TaskLists>>(`${this.apiUrl}json`,task);
+  }
+
+    //***************  Fetch all tasklists Contents
+  getAllTaskLists(type: string): Observable<ApiResponse<TaskLists[]>>{
+    return this.http.get<ApiResponse<TaskLists[]>>(`${this.apiUrl}type/`);
+  }
+  //***************  Fetch all tasklists Contents by user and importance
+  getAllTaskListsByUser(uid: number): Observable<TaskLists[]>{
+    return this.http.get<TaskLists[]>(`${this.apiUrl}sql/important/uid/${uid}`);
   }
 
   //***************  Fetch API Contents by types
   displayByType(type: string): Observable<ApiResponse<TaskLists[]>>{
     return this.http.get<ApiResponse<TaskLists[]>>(`${this.apiUrl}type/${type}`);
   }
-  displayByType2(type: string): Observable<TaskLists[]>{
-    return this.http.get<TaskLists[]>(`${this.apiUrl}type/${type}`);
+  displayByType2(type: string,uid:number): Observable<TaskLists[]>{
+    return this.http.get<TaskLists[]>(`${this.apiUrl}type/${type}/${uid}`);
   }
 
   //*************** Fetch API Contents by id

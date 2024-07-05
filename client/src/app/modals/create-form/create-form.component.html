@@ -3,7 +3,12 @@
         <form >
             <h1>{{ taskService.type }}</h1>
             <label class="title"for="title">Title:</label><br>
-            <input type="text" id="title" name="title" [(ngModel)]="title"><br>
+            <input type="text" id="title" name="title" [(ngModel)]="title">
+            <input type="checkbox" id="important" name="important" [(ngModel)]="isImportant">
+            <label for="important"> Important </label> 
+            <input type="datetime-local" id="dueDate" name="dueDate" [(ngModel)]="dueDate">
+            <label for="dueDate">Due date (date and time):</label>
+            <br>
             <label for="description" >Description:</label><br>
             <textarea class="description" type="text" id="description" name="description" [(ngModel)]="description"> </textarea><br><br>
             <p>{{ now }}</p>

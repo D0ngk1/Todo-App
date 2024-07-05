@@ -13,6 +13,9 @@ export class TodoDetailsComponent {
   date = "";
   description= "";
   id = "";
+  isDone = false;
+  isImportant = false;
+  dueDate ="";
 
 
   constructor(
@@ -23,6 +26,9 @@ export class TodoDetailsComponent {
   save(){
     this.selectedData[0].title = this.title;
     this.selectedData[0].description  = this.description;
+    this.selectedData[0].done  = this.isDone;
+    this.selectedData[0].important  = this.isImportant;
+    this.selectedData[0].dueDate  = this.dueDate;
     this.ts.updateById(this.ts.noteId,this.selectedData[0]).subscribe({
       next:(response)=> {
         this.router.navigate(['/create/'+this.ts.type]);
@@ -42,6 +48,9 @@ export class TodoDetailsComponent {
               this.date = this.selectedData[0].dateCreated;
               this.description = this.selectedData[0].description;
               this.id = ""+this.selectedData[0].id;
+              this.isDone = this.selectedData[0].done;
+              this.isImportant = this.selectedData[0].important;
+              this.dueDate = this.selectedData[0].dueDate;
             }
             
           },error:(err) => {
@@ -51,3 +60,4 @@ export class TodoDetailsComponent {
 
   }
 }
+

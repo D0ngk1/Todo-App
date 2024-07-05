@@ -1,10 +1,16 @@
-<div class="side-nav-bar">
-    <h2 class="app-title">To do list</h2>
-    <h4 class="user">{{ user }}</h4>
-    <div class="my-list">
-        <ul>
-            <li><button (click)="task()">Task</button></li>
-            <li><button (click)="list()">List</button></li>
-        </ul>
+<div>
+    <div class="side-nav-bar">
+        <h3 class="user">{{ user }}</h3>
+        <div class="my-list">
+            <ul>
+                <li><button routerLink="important">Important</button></li>
+                <li><button >Today</button></li>
+                <li><button >Plans</button></li>
+                <li><button (click)="task()">Task</button></li>
+                <li><button (click)="list()">List</button></li>
+            </ul>
+        </div>
     </div>
 </div>
+
+

@@ -9,6 +9,10 @@ export class TaskLists{
     public type: string;
     public description: string;
     public dateCreated: string;
+    public dueDate: string;
+    public done: boolean;
+    public important: boolean;
+    
     
         
     /*public TaskLists(id: number, title: string, type: string, description: string, date: string) {
@@ -18,12 +22,15 @@ export class TaskLists{
       this.description = description;
       this.date = date;
     }*/
-    public constructor(id: number,title: string, type: string, description: string, date: string) {
+    public constructor(id: number,title: string, type: string, description: string, date: string,dueDate:string,done:boolean,important:boolean) {
       this.id = id;
       this.title = title;
       this.type = type;
       this.description = description;
       this.dateCreated = date;
+      this.dueDate = dueDate;
+      this.done = done;
+      this.important = important;
     }
     /*
     public get getTitle(){

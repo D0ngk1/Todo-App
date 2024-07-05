@@ -1,8 +1,6 @@
 <main >
     <app-create-form *ngIf="taskService.showDialog" ></app-create-form>
     <app-todo-details *ngIf="taskService.showDetails" ></app-todo-details>
-    <!--<app-navigation (messageEvent)="receivedType($event)"></app-navigation> -->
-    <app-navigation></app-navigation>
     <div class="overview-main">
         <div>
             <h1 class="type" >{{ taskService.type }}</h1>

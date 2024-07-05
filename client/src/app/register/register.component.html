@@ -1,0 +1,17 @@
+<div class="parent">
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form>
+        <h3>Register Here</h3>
+
+        <label for="username">Username</label>
+        <input type="text" name="username" [(ngModel)]="loginObj.username" placeholder="Email or Phone" id="username">
+
+        <label for="password">Password</label>
+        <input type="password" name="password" [(ngModel)]="loginObj.password" placeholder="Password" id="password">
+
+        <button class="login-button" (click)="onRegister()">Register</button>
+    </form>
+</div>

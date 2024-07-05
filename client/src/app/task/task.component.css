@@ -37,6 +37,7 @@ div.add-task-div{
 
 }
 .item-lists{
+    max-height: max-content;
     margin: 10px;
     background-color: rgb(227, 204, 174);
     border-radius: 15px;
@@ -62,12 +63,12 @@ div.add-task-div{
     margin-right: 3%;
 }
 .display-list {
+    height: 10vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
 }
 .buttons{
-
     width: max-content;
 }
