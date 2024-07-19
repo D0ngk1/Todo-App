@@ -1,16 +1,14 @@
 <main >
     <app-create-form *ngIf="taskService.showDialog" ></app-create-form>
     <app-todo-details *ngIf="taskService.showDetails" ></app-todo-details>
-    <!--<app-navigation (messageEvent)="receivedType($event)"></app-navigation>-->
-    <!--  -->
     <div class="overview-main">
         <div>
-            <h1 class="type" >{{ taskService.type }} </h1>
+            <h1 class="type">PLANS</h1>
         </div>
         <div class="task-lists">
             <div class="add-task-div">
                     <button class="add-task-btn" (click)="taskService.showDialog=true">
-                    <span>+</span>Add new {{taskService.type.toLowerCase()}}
+                    <span>+</span>Add new Task / List
                     </button>
             </div>
             <div class="item-lists-header">

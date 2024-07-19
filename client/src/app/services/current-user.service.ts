@@ -2,46 +2,62 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
-import { LoginResponse } from '../model/User';
+import { LoginResponse, UserRegister } from '../model/User';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CurrentUserServiceService {
-  private currentUsers = new BehaviorSubject< LoginResponse | null | undefined >(undefined);
-  constructor(private http: HttpClient,private router: Router) { }
+  private currentUsers = new BehaviorSubject<UserRegister | null | undefined>(undefined);
+  
+  constructor(private http: HttpClient, private router: Router) { }
+  
   public firstLogin = true;
 
-  setCurrentUser(loginObj:any){
+  setCurrentUser(loginObj: any) {
     sessionStorage.clear();
-    this.http.post('http://localhost:8080/auth/login',loginObj).subscribe({
-      next:(response) => {
+    this.http.post('http://localhost:8080/auth/login', loginObj).subscribe({
+      next: (response) => {
         const loginResponse = response as LoginResponse;
-        this.currentUsers.next(loginResponse);
-        sessionStorage.setItem('users',loginResponse.user.username);
-        sessionStorage.setItem('userId',loginResponse.user.userId);
-        sessionStorage.setItem('loginToken',loginResponse.jwt);
+        this.currentUsers.next(loginResponse.user);
+        sessionStorage.setItem('users', loginResponse.user.username);
+        sessionStorage.setItem('userId', loginResponse.user.userId);
+        sessionStorage.setItem('loginToken', loginResponse.jwt);
         this.firstLogin = true;
         this.router.navigateByUrl('/task');
-      },error:(err) => {
+      },
+      error: (err) => {
         alert("Login error");
       }
     });
-    
   }
 
-  getCurrentUser(){
+  setUser(user: UserRegister) {
+    this.currentUsers.next(user);
+  }
+  
+  getValueUser() {
+    return this.currentUsers.value;
+  }
+  
+  getCurrentUser() {
     return this.currentUsers.asObservable();
   }
+  
+  /*updateUsername(username: string) {
+    const user = this.currentUsers.value;
+    if (user && user.user.username !== username) {
+      user.user.username = username;
+      this.setUser(user);
+      //sessionStorage.setItem('users', JSON.stringify(user));
+    }
+  }*/
+
   logout() {
-    // Clear session storage
     sessionStorage.removeItem('users');
     sessionStorage.removeItem('userId');
     sessionStorage.removeItem('loginToken');
-
-    // Clear current user
     this.currentUsers.next(null);
-    // Navigate to login page
     this.router.navigateByUrl('/login');
   }
 }

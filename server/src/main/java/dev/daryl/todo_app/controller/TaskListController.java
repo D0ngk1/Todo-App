@@ -86,6 +86,50 @@ public class TaskListController {
         }
 
     }
+    // Return records by users and date
+    @GetMapping("/sql/today/uid/{uid}")
+    public ResponseEntity<List<TaskListDTO>> getAllTaskListByUserAndToday(@PathVariable Integer uid){
+        try {
+            Optional<ApplicationUser> userOptional = authenticationService.findbyId(uid);
+            if (userOptional.isPresent()) {
+                ApplicationUser user = userOptional.get();
+                List<TaskListDTO> taskLists = new ArrayList<TaskListDTO>(taskListService.getAllTaskListsByUserAndToday(user));
+                if (taskLists.isEmpty()) {
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                }
+                //Return HttpStatus OK
+                return new ResponseEntity<>(taskLists, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+
+        } catch (Exception e) {
+            // Handles exception
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+    // Return records by users and date is not null
+    @GetMapping("/sql/plans/uid/{uid}")
+    public ResponseEntity<List<TaskListDTO>> getAllTaskListByUserAndDueDateNotNull(@PathVariable Integer uid){
+        try {
+            Optional<ApplicationUser> userOptional = authenticationService.findbyId(uid);
+            if (userOptional.isPresent()) {
+                ApplicationUser user = userOptional.get();
+                List<TaskListDTO> taskLists = new ArrayList<TaskListDTO>(taskListService.getAllTaskListsByUserAndDueDate(user));
+                if (taskLists.isEmpty()) {
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                }
+                //Return HttpStatus OK
+                return new ResponseEntity<>(taskLists, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+
+        } catch (Exception e) {
+            // Handles exception
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
     // Return records by users and importance
     @GetMapping("/sql/important/uid/{uid}")
     public ResponseEntity<List<TaskListDTO>> getAllTaskListByUserAndImportance(@PathVariable Integer uid){
@@ -94,6 +138,28 @@ public class TaskListController {
             if (userOptional.isPresent()) {
                 ApplicationUser user = userOptional.get();
                 List<TaskListDTO> taskLists = new ArrayList<TaskListDTO>(taskListService.getAllTaskListsByUserAndImportance(user));
+                if (taskLists.isEmpty()) {
+                    return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+                }
+                //Return HttpStatus OK
+                return new ResponseEntity<>(taskLists, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
+
+        } catch (Exception e) {
+            // Handles exception
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
+    // Return records by users and title
+    @GetMapping("/sql/search/uid/{uid}/{title}")
+    public ResponseEntity<List<TaskListDTO>> getAllTaskListByUserAndTitleLike(@PathVariable Integer uid,@PathVariable String title){
+        try {
+            Optional<ApplicationUser> userOptional = authenticationService.findbyId(uid);
+            if (userOptional.isPresent()) {
+                ApplicationUser user = userOptional.get();
+                List<TaskListDTO> taskLists = new ArrayList<TaskListDTO>(taskListService.getAllTaskListsByUserAndTitle(user,title));
                 if (taskLists.isEmpty()) {
                     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
                 }

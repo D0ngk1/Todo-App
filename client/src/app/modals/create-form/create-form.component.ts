@@ -34,17 +34,6 @@ export class CreateFormComponent implements OnInit{
     private router: Router,
     private currentServiceUser: CurrentUserServiceService
     ){}
-  /*ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
-  /****************** AddTask Without DB ********************
-  add(){
-    /*
-    let addItem =new TaskLists(this.item.length+1,this.title, this.type, this.description, this.now);
-    this.taskService.addTask(addItem);
-    this.taskService.showDialog=false;
-    this.router.navigate(['/'+this.type]);
-  }*/
 
   //Create Task in DB
   add(){
@@ -55,9 +44,9 @@ export class CreateFormComponent implements OnInit{
           alert('No user found');
           return;
         }
-        let userId = currentUser.user.userId;
+        let userId = currentUser.userId;
         let addItem: CreateTaskLists = {
-          user: currentUser.user,
+          user: currentUser,
           id: 0,
           title: this.title,
           type: this.type,

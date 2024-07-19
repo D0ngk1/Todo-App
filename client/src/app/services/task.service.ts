@@ -19,7 +19,7 @@ export class TaskService {
   type = "TASK";
   uid = sessionStorage.getItem('users');
 
-  constructor (private http: HttpClient, router: Router){
+  constructor (private http: HttpClient){
 
     
     //console.log(current.toUpperCase());
@@ -61,6 +61,18 @@ export class TaskService {
   getAllTaskListsByUser(uid: number): Observable<TaskLists[]>{
     return this.http.get<TaskLists[]>(`${this.apiUrl}sql/important/uid/${uid}`);
   }
+    //***************  Fetch all tasklists Contents by user and title search
+    getAllTaskListsByUserAndTitle(uid: number, title: string): Observable<TaskLists[]>{
+      return this.http.get<TaskLists[]>(`${this.apiUrl}sql/search/uid/${uid}/${title}`);
+    }
+   //***************  Fetch all tasklists Contents by user and dueDate
+   getAllTaskListsByUserAndDueDate(uid: number): Observable<TaskLists[]>{
+    return this.http.get<TaskLists[]>(`${this.apiUrl}sql/today/uid/${uid}`);
+  }
+     //***************  Fetch all tasklists Contents by user and dueDate not null
+  getAllTaskListsByUserAndPlans(uid: number): Observable<TaskLists[]>{
+    return this.http.get<TaskLists[]>(`${this.apiUrl}sql/plans/uid/${uid}`);
+  }
 
   //***************  Fetch API Contents by types
   displayByType(type: string): Observable<ApiResponse<TaskLists[]>>{
@@ -71,7 +83,7 @@ export class TaskService {
   }
 
   //*************** Fetch API Contents by id
-  getById2(id: number):Observable <ApiResponse<TaskLists>> {
+  getById2(id: number):Observable<ApiResponse<TaskLists>> {
     return this.http.get<ApiResponse<TaskLists>>(`${this.apiUrl}sql/${id}`);
   }
   getById(id: number): Observable<TaskLists[]>{

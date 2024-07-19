@@ -24,11 +24,15 @@
     text-align: left;
     font-size: 15px;
     border: 1px solid black;
-    background-color: rgb(237, 150, 115);;
-    
+    background-color: rgb(237, 150, 115);
+    cursor: pointer;
     /*background-color: antiquewhite;
        border: solid black;
     */
+  }
+  li button:hover{
+    background-color: rgb(77, 50, 40);
+    color: aliceblue;
   }
   .app-title{
     margin: 15px;
@@ -38,4 +42,8 @@
    /* border: solid black;*/
     margin-bottom: 20px;
     margin-left: 5px;
+  }
+  .is-active{
+    background-color: rgb(77, 50, 40)!important;
+    color: aliceblue;
   }

@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { TaskService } from '../services/task.service';
+import { CurrentUserServiceService } from '../services/current-user.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,17 +9,16 @@ import { TaskService } from '../services/task.service';
   styleUrl: './navigation.component.css'
 })
 export class NavigationComponent {
-  user = sessionStorage.getItem('users');
+  user: string | null = null;
+  @Output() messageEvent = new EventEmitter <string>();
   constructor(
     private router: Router,
-    private taskService: TaskService) 
-  {}
-  @Output() messageEvent = new EventEmitter <string> ();
-
-  task() {
-    this.router.navigate(['/task']);
-  }
-  list() {
-    this.router.navigate(['/list']);
+    private userService: CurrentUserServiceService
+  ) 
+  {
+    this.userService.getCurrentUser().subscribe(user => {
+      this.user = user ? user.username : null;
+      //console.log(user);
+    });
   }
 }

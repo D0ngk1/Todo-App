@@ -17,6 +17,11 @@ import { RegisterComponent } from './register/register.component';
 import { TopNavigationComponent } from './top-navigation/top-navigation.component';
 import { MainComponent } from './main/main.component';
 import { ImportantComponent } from './important/important.component';
+import { ProfileComponent } from './modals/profile/profile.component';
+import { TodayComponent } from './today/today.component';
+import { PlansComponent } from './plans/plans.component';
+import { DropdownProfileMenuComponent } from './dropdown-profile-menu/dropdown-profile-menu.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {path: 'login',component:LoginComponent},
@@ -27,11 +32,15 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
-    canActivate:[authGuard],
+    //canActivate:[authGuard],
     children: [
       { path: 'list', component: ListComponent },
       { path: 'task', component: TaskComponent },
-      { path: 'important', component: ImportantComponent }
+      { path: 'important', component: ImportantComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'today', component: TodayComponent },
+      { path: 'plans', component: PlansComponent },
+      { path: 'search', component: SearchComponent }
     ]
   }
 ];
@@ -50,7 +59,12 @@ const routes: Routes = [
     RegisterComponent,
     TopNavigationComponent,
     MainComponent,
-    ImportantComponent
+    ImportantComponent,
+    ProfileComponent,
+    TodayComponent,
+    PlansComponent,
+    DropdownProfileMenuComponent,
+    SearchComponent
   ],
   imports: [
     HttpClientModule,

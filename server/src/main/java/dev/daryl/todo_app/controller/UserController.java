@@ -1,6 +1,7 @@
 package dev.daryl.todo_app.controller;
 
-/*
+
+import dev.daryl.todo_app.model.ApplicationUser;
 import dev.daryl.todo_app.model.TaskList;
 import dev.daryl.todo_app.model.Users;
 import dev.daryl.todo_app.repository.UserRepository;
@@ -18,22 +19,20 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 @CrossOrigin(origins = "http://localhost:4200")
-@EnableWebSecurity*/
+@EnableWebSecurity
 public class UserController {
-    /*
+
     private final UserRepository userRepo;
-    private final TaskListService taskListService;
 
     //Dependency Injection
-    public UserController(UserRepository userRepo, TaskListService taskListService) {
+    public UserController(UserRepository userRepo) {
         this.userRepo = userRepo;
-        this.taskListService = taskListService;
     }
     //***************** Get all users
     @GetMapping("")
-    public ResponseEntity<List<Users>> getAllUsers(){
+    public ResponseEntity<List<ApplicationUser>> getAllUsers(){
         try{
-            List<Users> users = new ArrayList<>(userRepo.findAll());
+            List<ApplicationUser> users = new ArrayList<>(userRepo.findAll());
             if (users.isEmpty()){
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -70,33 +69,20 @@ public class UserController {
         }catch (Exception e){
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }
+    }*/
     //**************** Update Users
     @PutMapping("/edit/{id}")
-    public ResponseEntity<Users> updateUser(@RequestBody Users user,@PathVariable Long id){
+    public ResponseEntity<ApplicationUser> updateUser(@RequestBody ApplicationUser user,@PathVariable Long id){
         try{
-            Optional<Users> findUser = userRepo.findById(id);
+            Optional<ApplicationUser> findUser = userRepo.findById(id);
             if (findUser.isPresent()){
-                Users userF = findUser.get();
-                userF.setUserName(user.getUserName());
-                userF.setInvalidAttempt(user.getInvalidAttempt());
-                userF.setLocked(user.getLocked());
-                userF.setPassword(user.getPassword());
+                ApplicationUser userF = findUser.get();
+                userF.setUsername(user.getUsername());
                 return new ResponseEntity<>(userRepo.save(userF), HttpStatus.OK);
             }else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e){
-            return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    //***************** Create user
-    @PostMapping("/create")
-    public ResponseEntity<Users> createUser(@RequestBody Users user){
-        try {
-            userRepo.save(user);
-            return new ResponseEntity<>(user,HttpStatus.CREATED);
-        }catch (Exception e){
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -109,6 +95,6 @@ public class UserController {
         }catch (Exception e){
             return new ResponseEntity<>(null,HttpStatus.INTERNAL_SERVER_ERROR);
         }
-    }*/
+    }
 
 }

@@ -47,6 +47,24 @@ public class TaskListService {
                 .stream()
                 .map(taskListDTOMapper).collect(Collectors.toList());
     }
+    public List<TaskListDTO> getAllTaskListsByUserAndToday(ApplicationUser user){
+        LocalDateTime from = LocalDateTime.now();
+        LocalDateTime to = LocalDateTime.now().plusHours(24);
+        return taskListRepository.findByUserAndDueDateBetween(user, from,to)
+                .stream()
+                .map(taskListDTOMapper).collect(Collectors.toList());
+    }
+    public List<TaskListDTO> getAllTaskListsByUserAndDueDate(ApplicationUser user){
+        return taskListRepository.findByUserAndDueDateNotNull(user)
+                .stream()
+                .map(taskListDTOMapper).collect(Collectors.toList());
+    }
+    //Get Title like '% like %'
+    public List<TaskListDTO> getAllTaskListsByUserAndTitle(ApplicationUser user,String title){
+        return taskListRepository.findByUserAndTitleContaining(user,title)
+                .stream()
+                .map(taskListDTOMapper).collect(Collectors.toList());
+    }
 
 /*
     @PostConstruct

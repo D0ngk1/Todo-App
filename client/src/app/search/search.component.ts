@@ -1,41 +1,36 @@
-import { Component, OnInit, OnDestroy, numberAttribute } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
+import { distinctUntilChanged, filter, Subscription } from 'rxjs';
 import { TaskService } from '../services/task.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { TaskLists } from '../services/TasksLists';
-import { filter, switchMap } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
-import { CurrentUserServiceService } from '../services/current-user.service';
+import { TopNavService } from '../services/top-nav.service';
 
 @Component({
-  selector: 'app-task',
-  templateUrl: './task.component.html',
-  styleUrls: ['./task.component.css']
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrl: './search.component.css'
 })
-export class TaskComponent implements OnDestroy,OnInit {
+export class SearchComponent implements OnInit {
   data: TaskLists[] = [];
   routerSubscription: Subscription;
-
+  outputSearch: string = "";
   constructor(
     public taskService: TaskService,
     private router: Router,
     private route: ActivatedRoute,
-    private currentUserService: CurrentUserServiceService
+    private topNav: TopNavService
   ) {
-    this.routerSubscription = this.router.events
+    /*this.routerSubscription = this.router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe(() => {
-        console.log('NavigationEnd event detected');
-        this.getContentsByType();
-      });
+        this.getContentsByTitle();
+      });*/
   }
-
-  
   ngOnInit(): void {
-    if (this.currentUserService.firstLogin){
-      console.log('First login detected');
-      this.getContentsByType();
-      this.currentUserService.firstLogin = false;
-    }
+    this.topNav.searchInputMessage.pipe(distinctUntilChanged()).subscribe(m => {
+      this.outputSearch = m;
+      this.getContentsByTitle();
+    })
   }
 
   ngOnDestroy(): void {
@@ -52,7 +47,6 @@ export class TaskComponent implements OnDestroy,OnInit {
   delete(id: number) {
     this.taskService.deleteById(id).subscribe({
       next: (response) => {
-        console.log('Delete successful', response);
         this.router.navigate(['/create/' + this.taskService.type]);
       },
       error: (err) => {
@@ -61,15 +55,10 @@ export class TaskComponent implements OnDestroy,OnInit {
     });
   }
 
-  getContentsByType(): void {
-    this.taskService.type = "TASK";
+  getContentsByTitle(): void {
     let uidd = sessionStorage.getItem('userId');
-    if (!uidd) {
-      console.error('No userId found in sessionStorage');
-      return;
-    }
     const uid:number =  +uidd;
-    this.taskService.displayByType2(this.taskService.type,uid).subscribe({
+    this.taskService.getAllTaskListsByUserAndTitle(uid,this.outputSearch).subscribe({
       next: (response) => {
         this.data = response;
       },

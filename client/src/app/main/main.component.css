@@ -10,6 +10,5 @@
 .content-area {
     flex-grow: 1;
     overflow-y: auto;
-    padding: 20px;
     min-height: 300px;
 }

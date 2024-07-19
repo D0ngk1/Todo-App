@@ -62,7 +62,10 @@ div.add-task-div{
     margin-left: 40px;
 }
 .note-date {
-    margin-right: 20px;
+    /*background-color: aqua;*/
+    width: 156px !important;
+    height: 20px;
+    text-align: center;
 }
 .display-list {
     height: 65px;
@@ -71,28 +74,32 @@ div.add-task-div{
     justify-content: space-between;
 
 }
+.note-type{
+    margin-left: 50px;
+}
 .buttons{
     width: max-content;
 }
 
-.rows-header{
-    width: 75vw;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background-color: aqua;
-}
 .row-title{
     margin-left: 50px;
 }
+.row-type{
+    margin-left: 50px;
+}
 .row-date {
-    margin-right: 63px;
-
+    /*background-color: aqua;*/
+    width: 156px !important;
+    height: 20px;
+    text-align: center;
 }
 .item-lists-header{
-    max-height: max-content;
     margin: 10px;
     width: 75vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
     background-color: rgb(227, 204, 174);
     border-radius: 15px 15px 3px 3px;
 }
