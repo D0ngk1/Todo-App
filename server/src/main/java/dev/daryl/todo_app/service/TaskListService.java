@@ -42,6 +42,16 @@ public class TaskListService {
                 .stream()
                 .map(taskListDTOMapper).collect(Collectors.toList());
     }
+    public List<TaskListDTO> getAllTaskListsByUserAndType(ApplicationUser user,Type type){
+        return taskListRepository.findByTypeAndUser(type,user)
+                .stream()
+                .map(taskListDTOMapper).collect(Collectors.toList());
+    }
+    public List<TaskListDTO> getAllTaskListsById(Integer id){
+        return taskListRepository.findById(id)
+                .stream()
+                .map(taskListDTOMapper).collect(Collectors.toList());
+    }
     public List<TaskListDTO> getAllTaskListsByUserAndImportance(ApplicationUser user){
         return taskListRepository.findByUserAndIsImportant(user, true)
                 .stream()

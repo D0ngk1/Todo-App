@@ -1,20 +1,21 @@
 import { Component } from '@angular/core';
 import { TaskService } from '../services/task.service';
-import { TaskLists } from '../services/TasksLists';
+import { TaskLists, TaskListsDTO } from '../services/TasksLists';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-todo-details',
   templateUrl: './todo-details.component.html',
   styleUrl: './todo-details.component.css'
 })
 export class TodoDetailsComponent {
-  selectedData: TaskLists[] = [];
+  selectedDataDTO: TaskListsDTO[] = [];
   title="";
-  date = "";
   description= "";
-  id = "";
+  id :number;
   isDone = false;
   isImportant = false;
+  dateCreated= "";
   dueDate ="";
 
 
@@ -24,15 +25,21 @@ export class TodoDetailsComponent {
     // this.selectedData = this.ts.viewNotes(ts.noteId);
   }
   save(){
-    this.selectedData[0].title = this.title;
-    this.selectedData[0].description  = this.description;
-    this.selectedData[0].done  = this.isDone;
-    this.selectedData[0].important  = this.isImportant;
-    this.selectedData[0].dueDate  = this.dueDate;
-    this.ts.updateById(this.ts.noteId,this.selectedData[0]).subscribe({
+    let item: TaskLists = {
+      id: this.id,
+      title: this.title,
+      type: this.ts.type,
+      description: this.description,
+      dateCreated: this.dateCreated,
+      done: this.isDone,
+      important: this.isImportant,
+      dueDate: this.dueDate
+    };    
+    this.ts.updateById(this.ts.noteId,item).subscribe({
       next:(response)=> {
-        this.router.navigate(['/create/'+this.ts.type]);
+        let current = this.router.url;
         this.ts.showDetails=false;
+        this.router.navigateByUrl(current);
       },error:(err) => {
             console.error('Error fetching data by type', err);
           }
@@ -42,16 +49,18 @@ export class TodoDetailsComponent {
         //Get id
         this.ts.getById(this.ts.noteId).subscribe({
           next:(response)=>{
-            this.selectedData = response;
-            if (this.selectedData) {
-              this.title = this.selectedData[0].title;
-              this.date = this.selectedData[0].dateCreated;
-              this.description = this.selectedData[0].description;
-              this.id = ""+this.selectedData[0].id;
-              this.isDone = this.selectedData[0].done;
-              this.isImportant = this.selectedData[0].important;
-              this.dueDate = this.selectedData[0].dueDate;
+            this.selectedDataDTO = response;
+            if (this.selectedDataDTO) {
+              
+              this.title = this.selectedDataDTO[0].title;
+              this.dateCreated = this.selectedDataDTO[0].dateCreated;
+              this.description = this.selectedDataDTO[0].description;
+              this.id = this.selectedDataDTO[0].id;
+              this.isDone = this.selectedDataDTO[0].isDone;
+              this.isImportant = this.selectedDataDTO[0].isImportant;
+              this.dueDate = this.selectedDataDTO[0].dueDate;
             }
+            console.log("This is done : "+ this.isDone);
             
           },error:(err) => {
             console.error('Error fetching data by type', err);

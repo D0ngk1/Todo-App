@@ -53,11 +53,7 @@ public class TaskList {
     public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
-    @JsonProperty("done")
     private Boolean isDone;
-
-
-    @JsonProperty("important")
     private Boolean isImportant;
 
     public void setUser(ApplicationUser user) {

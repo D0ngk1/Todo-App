@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { TaskLists } from '../services/TasksLists';
+import { TaskLists, TaskListsDTO } from '../services/TasksLists';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements  OnDestroy {
-  data: TaskLists[] = [];
+  dataDTO: TaskListsDTO[] = [];
   routerSubscription: Subscription;
 
   constructor(
@@ -54,11 +54,51 @@ export class ListComponent implements  OnDestroy {
     const uid:number =  +uidd;
     this.taskService.displayByType2(this.taskService.type,uid).subscribe({
       next: (response) => {
-        this.data = response;
+        this.dataDTO = response;
       },
       error: (err) => {
         console.error('Error fetching data by type', err);
       }
     });
   }
+  importantButton(itemDTO: TaskListsDTO) {
+    itemDTO.isImportant = !itemDTO.isImportant;
+     let item: TaskLists = {
+       id: itemDTO.id,
+       title: itemDTO.title,
+       type: itemDTO.type,
+       description: itemDTO.description,
+       dateCreated: itemDTO.dateCreated,
+       done: itemDTO.isDone,
+       important: itemDTO.isImportant,
+       dueDate: itemDTO.dueDate
+     };
+     this.updateItem(item);   
+     console.log(itemDTO.isImportant);
+   }
+ 
+   doneButton(itemDTO:TaskListsDTO){
+     itemDTO.isDone = !itemDTO.isDone;
+     let item: TaskLists = {
+       id: itemDTO.id,
+       title: itemDTO.title,
+       type: itemDTO.type,
+       description: itemDTO.description,
+       dateCreated: itemDTO.dateCreated,
+       done: itemDTO.isDone,
+       important: itemDTO.isImportant,
+       dueDate:itemDTO.dueDate
+     }; 
+     this.updateItem(item);
+   }
+   updateItem(item:TaskLists ){
+     console.log(item);
+     this.taskService.updateById(item.id,item).subscribe({
+       next:(response)=> {
+         this.router.navigate(['/create/'+this.taskService.type]);
+       },error:(err) => {
+             console.error('Error fetching data by type', err);
+           }
+     });
+   }
 }

@@ -4,43 +4,51 @@
     width: 100vw;
     height: 100vh;
     justify-content: center;
-    align-items: center;
     position: fixed;
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 4;
 }
 .view-details-bg{
-    width: 40vw;
-    height: 70vh;
+    width: 45rem;
+    margin-top: 5%;
+    height: 17rem;
     background-color: rgb(227, 204, 174);
     border-radius: 15px;
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
 }
 
-.view-details-bg form {
-   width: 80%;
-   height: 100%;
+.view-details-bg .form {
+   width: 95%;
+   height: 95%;
+   display: flex;
+   flex-direction:column;
+   align-items: center;
 }
 .description{
     height: 60%;
     width: 98.5%;
+    margin-bottom: 10px;
 }
 .buttons{
-    width: 55%;
-    padding: auto;
-    margin: auto;
-    height: 9%;
+    width: max-content;
+    height: 33px;
 }
 .fbutton {
-    width: 48%;
+    width: 5rem;
     background-color: white;
-    height: 92%;
-    margin: 2px;
+    height: inherit;
     border-radius: 5px;
     border: solid 1px black;
+}
+.cancel-fbutton {
+  margin-left: 3px;
+    background-color: rgb(237, 150, 115);
+}
+.create-fbutton {
+  margin-right: 3px;
+  background-color: rgb(92, 146, 240);
 }
 .cancel-fbutton {
     background-color: rgb(237, 150, 115);
@@ -48,4 +56,130 @@
 .save-fbutton {
     background-color: rgb(92, 146, 240);
 }
+.first-row{
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+.title{
+    flex-basis: 90%;
+    min-width: 50%;
+    height: 40px;
+    border: 0px;
+    padding-left: 10px;
+}
+.radio-complete, .important-button{
+    flex-basis: 5%;
+    height: 20px;
+    border: none;
+}
+.second-row{
+    display: flex;
+    width: 100%;
+    height: max-content;
+    justify-content: center;
+    align-items: center;
+}
+#dueDate[data-tooltip]:hover::after {
+    display: block;
+    position: absolute;
+    content: attr(data-tooltip);
+    border: 1px solid black;
+    background: #ffffff;
+    margin-top: 5px;
+    margin-left: -30px;
+    padding: .25em;
+}
+#dueDate{
+    width: max-content;
+}
+.date{
+    margin-right: 10px;
+}
+.date,.duedate{
+    background-color: #ffffff;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
 
+
+.myDueDate,.date{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    height: 35px;
+    text-align: center;
+    font-size: 18px;
+    
+}
+.description{
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100px;
+    max-height: 100px;
+    padding: 10px;
+}
+.rate {
+    width: max-content;
+    height: max-content;
+    padding: auto;
+    margin-bottom: 10px;
+    margin-right: 5px;
+  }
+  .rate:not(:checked) > input {
+    display: inline-block;
+    position: absolute;
+    top:-9999px;
+  }
+  .rate:not(:checked) > label {
+    overflow:hidden;
+    cursor:pointer;
+    font-size:45px;
+    color:#ffffff;
+  }
+  .rate:not(:checked) > label:before {
+    content: '★ ';
+  }
+  .rate > input:checked ~ label {
+    color: rgb(92, 146, 240);    
+  }
+.duedate{
+    display: flex;
+    width: 50%;
+}
+.date{
+    width: 50%;
+}
+/* Input local date time */
+input[type="datetime-local"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background-color: #ffffff00;
+    border-radius: 4px;
+    font-size: 16px;
+    width: 250px;
+  }
+  
+  input[type="datetime-local"]::-webkit-datetime-edit,
+  input[type="datetime-local"]::-webkit-inner-spin-button,
+  input[type="datetime-local"]::-webkit-clear-button {
+    display: none;
+  }
+  input[type="datetime-local"]::-webkit-calendar-picker-indicator{
+    font-size: 30px;
+    cursor: pointer;
+  }
+  input[type="datetime-local"]:focus {
+    outline: none;
+  }
+  .description,.title{
+    border: none;
+    border-radius: 5px;
+  }
+  .description:focus, .title:focus{
+    outline: none;
+  }

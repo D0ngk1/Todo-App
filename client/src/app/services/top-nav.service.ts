@@ -7,9 +7,10 @@ import { BehaviorSubject } from 'rxjs';
 export class TopNavService {
   private searchInput = new BehaviorSubject('');
   public searchInputMessage = this.searchInput.asObservable();
-  public showProfile = false;
+  //public showProfile = false;
   
   setSearchInput(data:any){
+    console.log('setSearchInput called with:', data);
     this.searchInput.next(data);
   }
 

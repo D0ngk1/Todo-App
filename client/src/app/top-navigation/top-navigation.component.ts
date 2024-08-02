@@ -17,16 +17,18 @@ export class TopNavigationComponent {
   input : string ="";
   search(){
     if(this.router.url !== '/search'){
+      console.log("if");
       this.topNav.setSearchInput(this.input);
       this.router.navigateByUrl('/search');
     }else{
+      console.log("else");
       this.topNav.setSearchInput(this.input);
     }
   }
   logout(){
     this.currentUserService.logout();
   }
-  profile(){
+  /*profile(){
     this.topNav.showProfile=true;
-  }
+  }*/
 }

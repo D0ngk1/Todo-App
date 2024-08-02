@@ -13,6 +13,7 @@ import { CreateTaskLists } from '../../model/User';
 })
 export class CreateFormComponent implements OnInit{
   task: ITask[]=[];
+  isHidden = true;
   description="";
   type:string=this.taskService.type;
   title="";
@@ -27,7 +28,7 @@ export class CreateFormComponent implements OnInit{
     String(this.now.getMinutes()).padStart(2, '0');
     //String(this.now.getMilliseconds()).padStart(3, '0') + '000';
   
-    
+
   //Constructor
   constructor(
     public taskService: TaskService,
@@ -70,6 +71,10 @@ export class CreateFormComponent implements OnInit{
   }
   cancel() {
     this.taskService.showDialog=false;
+  }
+  showDescription(){
+    if(this.isHidden==false) this.isHidden=true;
+    else this.isHidden = false;
   }
 
   ngOnInit(): void {

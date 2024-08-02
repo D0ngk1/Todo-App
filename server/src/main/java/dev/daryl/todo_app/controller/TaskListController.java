@@ -152,6 +152,26 @@ public class TaskListController {
         }
 
     }
+    //**************************** Return records by Types and User
+    @GetMapping("/type/{type}/{uid}")
+    public ResponseEntity<List<TaskListDTO>> findByTypesAndUid(@PathVariable Type type,@PathVariable Integer uid) {
+        try {
+            Optional<ApplicationUser> userOptional = authenticationService.findbyId(uid);
+            if (userOptional.isPresent()) {
+                ApplicationUser user = userOptional.get();
+                List<TaskListDTO> taskLists = taskListService.getAllTaskListsByUserAndType(user, type);
+                if (taskLists.isEmpty()) {
+                    return new ResponseEntity<>(taskLists,HttpStatus.NO_CONTENT);
+                }
+                return new ResponseEntity<>(taskLists, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+            }
+        } catch (Exception e) {
+            // handle exceptions
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     // Return records by users and title
     @GetMapping("/sql/search/uid/{uid}/{title}")
     public ResponseEntity<List<TaskListDTO>> getAllTaskListByUserAndTitleLike(@PathVariable Integer uid,@PathVariable String title){
@@ -185,24 +205,6 @@ public class TaskListController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    //**************************** Return records by Types and User
-    @GetMapping("/type/{type}/{uid}")
-    public ResponseEntity<List<TaskList>> findByTypesAndUid(@PathVariable Type type,@PathVariable Integer uid) {
-        try {
-            Optional<ApplicationUser> userOptional = authenticationService.findbyId(uid);
-            if (userOptional.isPresent()) {
-                ApplicationUser user = userOptional.get();
-                List<TaskList> taskLists = taskListRepository.findByTypeAndUser(type, user);
-                return new ResponseEntity<>(taskLists, HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(null, HttpStatus.NOT_MODIFIED);
-            }
-        } catch (Exception e) {
-            // handle exceptions
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
     //**************************** Create a record with the Database using RequestBody
     @PostMapping("/json")
     public ResponseEntity<TaskList> addTaskListWithBody(@RequestBody TaskList content) {
@@ -221,25 +223,21 @@ public class TaskListController {
         }
     }
 
-    //**************************** Find by id without Database
-    @GetMapping("/{id}")
-    public Optional<TaskList> findById(@PathVariable Integer id){
-        return repository.findById(id);
-    }
-
     //*************************** Find records by id with Database
     @GetMapping("/sql/{id}")
-    public ResponseEntity<List<TaskList>> getId(@PathVariable Integer id) {
+    public ResponseEntity<List<TaskListDTO>> getId(@PathVariable Integer id) {
         try {
 
-            List<TaskList> taskList = taskListRepository.findById(id);
-            return new ResponseEntity<>(taskList,HttpStatus.OK);
+            List<TaskListDTO> taskLists = taskListService.getAllTaskListsById(id);
+            if (taskLists.isEmpty()) {
+                return new ResponseEntity<>(taskLists,HttpStatus.NO_CONTENT);
+            }
+            return new ResponseEntity<>(taskLists, HttpStatus.OK);
         } catch (Exception e) {
             // handle exception
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
 
     //Create a record without the Database
     @ResponseStatus(HttpStatus.CREATED)

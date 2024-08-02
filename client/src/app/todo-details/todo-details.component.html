@@ -1,29 +1,26 @@
 <div class="view-details">
     <div class="view-details-bg">
-        <!--<h2>{{ts.type}}</h2>
-        <p>{{title}}</p>
-        <p>{{ts.noteId}}</p>
-        <p>{{description}}</p>
-        <p>{{date}}</p>
-
-        --> 
-        <h2>{{ts.type}}</h2>
-        <form >
-            <label class="title"for="title">Title:</label><br>
-            <input type="text" id="title" name="title" [(ngModel)]="title">
-            <input type="checkbox" id="important" name="important" [(ngModel)]="isImportant">
-            <label for="important"> Important </label>
-            <input type="checkbox" id="completed" name="completed" [(ngModel)]="isDone">
-            <label for="completed"> Completed</label><br>
-            <label for="description" >Description:</label><br>
-            <textarea class="description" type="text" id="description" name="description" [(ngModel)]="description"> </textarea>
-            <p>{{date}}</p>
-            <input type="datetime-local" id="dueDate" name="dueDate" [(ngModel)]="dueDate">
-            <label for="dueDate">Due date (date and time):</label>
+        <div class="form">
+            <div class="first-row">
+                <input type="checkbox" class="radio-complete" [(ngModel)]="isDone"/>
+                <input type="text" id="title" name="title" [(ngModel)]="title" class="title">
+                <div class="rate" data-tooltip="Mark as Important">
+                    <input type="checkbox" id="star" name="rate" [(ngModel)]="isImportant" />
+                    <label for="star"></label>
+                </div>
+            </div>
+            <div class="second-row">
+                <p class="date">Date created: {{dateCreated}}</p>
+                <div class="duedate">
+                    <input type="datetime-local" id="dueDate" name="dueDate" [(ngModel)]="dueDate" data-tooltip="Add due date">
+                    <p class="myDueDate">{{ dueDate ? dueDate : 'None' }}</p>
+                </div>
+            </div>
+            <textarea class="description" type="text" id="description" name="description" [(ngModel)]="description" placeholder="Description . . ."> </textarea>
             <div class="buttons">
                 <input type="submit" value="Save" (click)="save()" class="fbutton save-fbutton">
                 <button class="cancel-btn" (click)="ts.showDetails=false" class="fbutton cancel-fbutton">Close</button>
             </div>
-        </form>         
+        </div>        
     </div>
 </div>

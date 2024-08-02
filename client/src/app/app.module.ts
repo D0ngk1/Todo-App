@@ -29,6 +29,9 @@ const routes: Routes = [
   {path: 'register',component:RegisterComponent},
   {path: 'create/TASK',redirectTo:'task',pathMatch:'full'},
   {path: 'create/LIST',redirectTo:'list',pathMatch:'full'},
+  {path: 'create/TODAY',redirectTo:'today',pathMatch:'full'},
+  {path: 'create/PLANS',redirectTo:'plans',pathMatch:'full'},
+  {path: 'create/IMPORTANT',redirectTo:'important',pathMatch:'full'},
   {
     path: '',
     component: MainComponent,
@@ -71,7 +74,7 @@ const routes: Routes = [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    RouterModule.forRoot(routes),
+    RouterModule.forRoot(routes,{onSameUrlNavigation: 'reload'}),
     RouterModule.forChild(routes)
   ],
   providers: [

@@ -3,33 +3,44 @@
     <app-todo-details *ngIf="taskService.showDetails" ></app-todo-details>
     <div class="overview-main">
         <div>
-            <h1 class="type">PLANS</h1>
+            <h1 class="type" >PLANS</h1>
         </div>
         <div class="task-lists">
             <div class="add-task-div">
-                    <button class="add-task-btn" (click)="taskService.showDialog=true">
-                    <span>+</span>Add new Task / List
-                    </button>
+                <button class="add-task-btn" (click)="taskService.showDialog=true">
+                <span>+</span>Add new Task / List
+                </button>
             </div>
             <div class="item-lists-header">
+                <div class="blank"></div>
                 <div class="notes-header">
                     <h4 class="row-title">Title</h4>
                     <h4 class="row-date">Due Date</h4>
+                    <h4 class="row-important">Important</h4>
+                    <div class="row-buttons"></div>
                 </div>
+                
             </div>
-            <div *ngFor="let item of data" class="item-lists">
+            <div *ngFor="let item of dataDTO" class="item-lists">
                 <div class="display-list" >
-                    <div class="notes" (click)="viewNotes(item.id)">
-                        <h4 class="note-title">{{ item.title }}</h4>
-                        <p class="note-date">{{ item.dueDate }}</p>
-                    </div>
-                    <div class="list-buttons">
+                    <input type="checkbox" class="radio-complete" [(ngModel)]="item.isDone" (click)="doneButton(item)"/>
+                    <div class="notes">
+                        <div class="crossout" *ngIf="item.isDone === true" ></div>
+                        <span class="clickable" (click)="viewNotes(item.id)"></span>
+                        <h4 class="note-title" >{{ item.title }}</h4>
+                        <p class="note-date" >{{ item.dueDate ? item.dueDate : 'None' }}</p>
+                        <div  class="note-important">
+                            <div class="rate" data-tooltip="Mark as Important">
+                                <input type="checkbox" id="star{{item.id}}" name="rate{{item.id}}" [(ngModel)]="item.isImportant" (click)="importantButton(item)"/> 
+                                <label for="star{{item.id}}"></label>
+                            </div>
+                        </div>
                         <div class="buttons">
-                            <button (click)="delete(item.id)">Delete</button>
+                            <button class="delete-button" (click)="delete(item.id)">Delete</button>
                         </div>
                     </div>
                 </div>
-              </div>
+            </div>
         </div>
     </div>
 </main>

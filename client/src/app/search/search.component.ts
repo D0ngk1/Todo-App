@@ -10,7 +10,7 @@ import { TopNavService } from '../services/top-nav.service';
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent {
   data: TaskLists[] = [];
   routerSubscription: Subscription;
   outputSearch: string = "";
@@ -20,23 +20,11 @@ export class SearchComponent implements OnInit {
     private route: ActivatedRoute,
     private topNav: TopNavService
   ) {
-    /*this.routerSubscription = this.router.events
-      .pipe(filter((event) => event instanceof NavigationEnd))
-      .subscribe(() => {
-        this.getContentsByTitle();
-      });*/
-  }
-  ngOnInit(): void {
     this.topNav.searchInputMessage.pipe(distinctUntilChanged()).subscribe(m => {
+      console.log('searchInputMessage emitted:', m);
       this.outputSearch = m;
       this.getContentsByTitle();
     })
-  }
-
-  ngOnDestroy(): void {
-    if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe();
-    }
   }
 
   viewNotes(id: number) {

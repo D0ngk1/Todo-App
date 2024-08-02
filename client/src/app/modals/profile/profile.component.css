@@ -2,49 +2,21 @@
 .parent {
     width: 100vw;
     height: 100vh;
-    background-color: rgb(63, 63, 63);
-}
-
-.background {
-    width: 430px;
-    height: 520px;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    left: 50%;
-    top: 50%;
-}
-
-.background .shape {
-    height: 200px;
-    width: 200px;
-    position: absolute;
-    border-radius: 50%;
-}
-
-.shape:first-child {
-    background: linear-gradient(#1845ad, #23a2f6);
-    left: -80px;
-    top: -80px;
-}
-
-.shape:last-child {
-    background: linear-gradient(to right, #ff512f, #f09819);
-    right: -30px;
-    bottom: -80px;
 }
 
 form {
-    height: 520px;
-    width: 400px;
-    background-color: rgba(255, 255, 255, 0.13);
+    max-height: 30rem;
+    min-height: 30rem;
+    max-width: 25rem;
+    min-width: 25rem;
+    background-color: rgb(227, 204, 174);
     position: absolute;
     transform: translate(-50%, -50%);
-    top: 50%;
+    top: 35%;
     left: 50%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 50px 35px;
 }
 
@@ -54,6 +26,7 @@ form * {
     letter-spacing: 0.5px;
     outline: none;
     border: none;
+    color: #050505;
 }
 
 form h3 {
@@ -74,7 +47,7 @@ input {
     display: block;
     height: 50px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.07);
+    background-color: white;
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 8px;
@@ -83,54 +56,17 @@ input {
 }
 
 ::placeholder {
-    color: #e5e5e5;
+
 }
 
 button.login-button {
     margin-top: 50px;
     width: 100%;
-    background-color: #ffffff; /* Ensure this is set to the desired background color */
+    background-color: rgb(92, 146, 240); /* Ensure this is set to the desired background color */
     color: #050505 !important; /* This sets the font color to white and uses !important to override other styles */
     padding: 15px 0;
     font-size: 18px;
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
-}
-button.register-button {
-    margin-top: 20px;
-    width: 100%;
-    background-color: #ffffff; /* Ensure this is set to the desired background color */
-    color: #050505 !important; /* This sets the font color to white and uses !important to override other styles */
-    padding: 15px 0;
-    font-size: 18px;
-    font-weight: 600;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.social {
-    margin-top: 30px;
-    display: flex;
-}
-
-.social div {
-    width: 150px;
-    border-radius: 3px;
-    padding: 5px 10px 10px 5px;
-    background-color: rgba(255, 255, 255, 0.27);
-    color: #eaf0fb;
-    text-align: center;
-}
-
-.social div:hover {
-    background-color: rgba(255, 255, 255, 0.47);
-}
-
-.social .fb {
-    margin-left: 25px;
-}
-
-.social i {
-    margin-right: 4px;
 }

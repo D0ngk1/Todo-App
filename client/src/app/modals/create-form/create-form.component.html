@@ -1,19 +1,24 @@
-<div class="create-task-container">
-    <div>
+<div class="view-details">
+    <div class="hidden-description shadow" [class.view-details-bg] = "isHidden === false" >
         <form >
-            <h1>{{ taskService.type }}</h1>
-            <label class="title"for="title">Title:</label><br>
-            <input type="text" id="title" name="title" [(ngModel)]="title">
-            <input type="checkbox" id="important" name="important" [(ngModel)]="isImportant">
-            <label for="important"> Important </label> 
-            <input type="datetime-local" id="dueDate" name="dueDate" [(ngModel)]="dueDate">
-            <label for="dueDate">Due date (date and time):</label>
-            <br>
-            <label for="description" >Description:</label><br>
-            <textarea class="description" type="text" id="description" name="description" [(ngModel)]="description"> </textarea><br><br>
-            <p>{{ now }}</p>
-            <input type="submit" value="Create" (click)="add()">
-            <button class="cancel-btn" (click)="cancel()" *ngIf="taskService.showDialog">Cancel</button>
+            <div class="one-line">
+                <div class="rate" data-tooltip="Mark as Important">
+                    <input type="checkbox" id="star" name="rate" [(ngModel)]="isImportant" />
+                    <label for="star"></label>
+                </div>
+                <input type="text" class="title" id="title" name="title" [(ngModel)]="title" placeholder="TItle.."> 
+                <div class="description-icon" data-tooltip="Add additional info" (click)="showDescription()" [class.showingDescription] = "isHidden === false"></div>
+                <input type="datetime-local" id="dueDate" name="dueDate" [(ngModel)]="dueDate" data-tooltip="Add due date">
+                <div class="dueDate" [class.dueDateNotNUll] = "dueDate !== ''" data-tooltip="Due date">{{ dueDate }}</div>
+            </div>
+            <textarea class="description" type="text" id="description" [hidden]="isHidden" placeholder="Description.." name="description" [(ngModel)]="description"> </textarea>
+            <div class="buttons" >
+                <input type="submit" value="add" (click)="add()" class="fbutton create-fbutton">
+                <button (click)="cancel()" *ngIf="taskService.showDialog" class="fbutton cancel-fbutton">Close</button>
+            </div>
         </form> 
     </div>
 </div>
+<!--[class.adjust-button] = "isHidden === true"
+<div class="dueDate" *ngIf="dueDate">{{ dueDate }}</div>
+-->

@@ -3,6 +3,37 @@ export interface ApiResponse<T>{
   data: T;
 }
 
+export class TaskListsDTO{
+  public id: number;
+  public title: string;
+  public type: string;
+  public description: string;
+  public dateCreated: string;
+  public dueDate: string;
+  public isDone: boolean;
+  public isImportant: boolean;
+  
+  
+      
+  /*public TaskLists(id: number, title: string, type: string, description: string, date: string) {
+    this.id = id;
+    this.title = title;
+    this.type = type;
+    this.description = description;
+    this.date = date;
+  }*/
+  public constructor(id: number,title: string, type: string, description: string, date: string,dueDate:string,isDone:boolean,isImportant:boolean) {
+    this.id = id;
+    this.title = title;
+    this.type = type;
+    this.description = description;
+    this.dateCreated = date;
+    this.dueDate = dueDate;
+    this.isDone = isDone;
+    this.isImportant = isImportant;
+  }
+}
+
 export class TaskLists{
     public id: number;
     public title: string;

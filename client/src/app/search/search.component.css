@@ -62,8 +62,8 @@ div.add-task-div{
     margin-left: 40px;
 }
 .note-date {
-    /*background-color: aqua;*/
-    width: 156px !important;
+    background-color: aqua;
+    width: 220px;
     height: 20px;
     text-align: center;
 }
@@ -89,7 +89,7 @@ div.add-task-div{
 }
 .row-date {
     /*background-color: aqua;*/
-    width: 156px !important;
+    width: 220px;
     height: 20px;
     text-align: center;
 }
