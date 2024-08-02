@@ -68,6 +68,13 @@
     height: 40px;
     border: 0px;
     padding-left: 10px;
+    font-size: large;
+    
+}
+.cross-text{
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  color: rgb(41, 42, 43);
 }
 .radio-complete, .important-button{
     flex-basis: 5%;
@@ -120,6 +127,7 @@
     min-height: 100px;
     max-height: 100px;
     padding: 10px;
+    font-size: large;
 }
 .rate {
     width: max-content;

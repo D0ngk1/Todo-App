@@ -3,7 +3,7 @@
         <div class="form">
             <div class="first-row">
                 <input type="checkbox" class="radio-complete" [(ngModel)]="isDone"/>
-                <input type="text" id="title" name="title" [(ngModel)]="title" class="title">
+                <input type="text" id="title" name="title"  [(ngModel)]="title" class="title" [class.cross-text] = "isDone === true">
                 <div class="rate" data-tooltip="Mark as Important">
                     <input type="checkbox" id="star" name="rate" [(ngModel)]="isImportant" />
                     <label for="star"></label>
