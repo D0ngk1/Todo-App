@@ -1,7 +1,6 @@
 package dev.daryl.todo_app.repository;
 
 import dev.daryl.todo_app.model.ApplicationUser;
-import dev.daryl.todo_app.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

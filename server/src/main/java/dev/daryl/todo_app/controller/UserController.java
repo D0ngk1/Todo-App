@@ -2,11 +2,7 @@ package dev.daryl.todo_app.controller;
 
 
 import dev.daryl.todo_app.model.ApplicationUser;
-import dev.daryl.todo_app.model.TaskList;
-import dev.daryl.todo_app.model.Users;
 import dev.daryl.todo_app.repository.UserRepository;
-import dev.daryl.todo_app.service.TaskListService;
-import org.apache.catalina.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
