@@ -35,7 +35,7 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
-    //canActivate:[authGuard],
+    canActivate:[authGuard],
     children: [
       { path: 'list', component: ListComponent },
       { path: 'task', component: TaskComponent },
@@ -45,7 +45,8 @@ const routes: Routes = [
       { path: 'plans', component: PlansComponent },
       { path: 'search', component: SearchComponent }
     ]
-  }
+  },
+  { path: '**', redirectTo: 'login' }
 ];
 
 
