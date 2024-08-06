@@ -62,7 +62,7 @@ public class SecurityConfiguration {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/auth/**").permitAll();
+                    auth.requestMatchers("/", "/index.html", "/static/**","/auth/**").permitAll();
                     //auth.requestMatchers("/admin/**").hasRole("ADMIN");//** Only Allows admin role to access admin page
                     //auth.requestMatchers("/user/**").hasAnyRole("ADMIN","USER");** Only Allows admin / user role to access user page
                     auth.anyRequest().authenticated();
