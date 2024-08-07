@@ -9,7 +9,7 @@ import { CreateTaskLists } from '../model/User';
   providedIn: 'root'
 })
 export class TaskService {
-  apiUrl = "http://localhost:8080/api/content/";
+  apiUrl = "http://todo-app-production-598c.up.railway.app/api/content/";
   private data: TaskLists[]=[];
   //private selectedData: TaskLists[]=[];
   private filteredData: TaskLists[]=[];
