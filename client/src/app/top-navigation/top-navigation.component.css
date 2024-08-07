@@ -29,7 +29,7 @@
 .searchButton {
   width: 45px;
   aspect-ratio: 1 / 1; /* This ensures the button remains square */
-  background: url("../../assets/search-icon.png");
+  background:  url("/dist/todo-app/browser/assets/search-icon.png");
   background-repeat: no-repeat;
   background-size: 70%; /* Adjust the size of the icon */
   background-position: center;
@@ -42,6 +42,10 @@
   flex-shrink: 0; /* Prevents the button from shrinking */
   padding: 0; /* Remove any padding */
   font-size: 20px;
+}
+.img{
+  width: 50px;
+  height: 50px;
 }
 /*Resize the wrap to see the search bar change!*/
 .wrap{

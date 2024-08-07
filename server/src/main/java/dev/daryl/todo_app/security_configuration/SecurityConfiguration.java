@@ -9,10 +9,12 @@ import com.nimbusds.jose.proc.SecurityContext;
 import dev.daryl.todo_app.utils.RSAKeyProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -62,7 +64,7 @@ public class SecurityConfiguration {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/", "/index.html", "/static/**","/auth/**").permitAll();
+                    auth.requestMatchers("/", "/index.html","/dist/todo-app/browser/**","/dist/**", "/static/**","/auth/**", "/*.js", "/*.css", "/*.ico","/*.png", "/assets/**","/media/**").permitAll();
                     //auth.requestMatchers("/admin/**").hasRole("ADMIN");//** Only Allows admin role to access admin page
                     //auth.requestMatchers("/user/**").hasAnyRole("ADMIN","USER");** Only Allows admin / user role to access user page
                     auth.anyRequest().authenticated();
