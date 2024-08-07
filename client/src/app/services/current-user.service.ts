@@ -16,7 +16,7 @@ export class CurrentUserServiceService {
 
   setCurrentUser(loginObj: any) {
     sessionStorage.clear();
-    this.http.post('http://localhost:8080/auth/login', loginObj).subscribe({
+    this.http.post('https://todo-app-production-598c.up.railway.app/auth/login', loginObj).subscribe({
       next: (response) => {
         const loginResponse = response as LoginResponse;
         this.currentUsers.next(loginResponse.user);

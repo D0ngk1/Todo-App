@@ -9,7 +9,7 @@ import { CurrentUserServiceService } from './current-user.service';
   providedIn: 'root'
 })
 export class UserService {
-  apiUrl = "http://todo-app-production-598c.up.railway.app/users/";
+  apiUrl = "https://todo-app-production-598c.up.railway.app/users/";
   messageEvent: EventEmitter<string>;
   /*deleteById(id:number):Observable<TaskLists>{
     return this.http.delete<TaskLists>(`${this.apiUrl}sql/${id}`);

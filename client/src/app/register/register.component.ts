@@ -19,7 +19,7 @@ export class RegisterComponent {
     "password" : ""
   };
   onRegister(){
-    this.http.post('http://localhost:8080/auth/register',this.loginObj).subscribe({
+    this.http.post('https://todo-app-production-598c.up.railway.app/auth/register',this.loginObj).subscribe({
       next:(response) => {
         this.users = response as UserRegister;;
         console.log(this.users.userId);
