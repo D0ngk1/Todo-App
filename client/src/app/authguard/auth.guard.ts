@@ -12,7 +12,7 @@ export const authGuard: CanActivateFn = (route, state) :Observable<boolean> => {
  return currenServiceUser.getCurrentUser().pipe(
   map((currentUser) => {
   if(!currentUser || currentUser === undefined ){
-   router.navigateByUrl('/login');
+   router.navigateByUrl('/authentication/login');
     return false;
   }
   return true;

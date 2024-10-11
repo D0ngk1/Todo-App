@@ -7,7 +7,7 @@ import { TaskLists, TaskListsDTO } from '../services/TasksLists';
 @Component({
   selector: 'app-today',
   templateUrl: './today.component.html',
-  styleUrl: './today.component.css'
+  styleUrl: './../task/task.component.css'
 })
 export class TodayComponent implements OnDestroy{
   routerSubscription: Subscription;

@@ -1,14 +1,19 @@
 .main-container {
+    height: calc(100vh - 60px); /* Adjust 60px to match your top navigation height height: calc(100vh - 60px);*/
     display: flex;
-    height: calc(100vh - 60px); /* Adjust 60px to match your top navigation height */
 }
-
-.navigation { /* Adjust as needed */
-    overflow-y: auto;
+.sidebarOpen{
+    width: 13vw;
+    background-color: aqua;
 }
-
+.sidebarClose{
+    width: 2vw;
+    background-color: aqua;
+}
 .content-area {
-    flex-grow: 1;
-    overflow-y: auto;
-    min-height: 300px;
+    height: 100vh;
 }
+.content-area-close{
+    width: 50vw;
+}
+

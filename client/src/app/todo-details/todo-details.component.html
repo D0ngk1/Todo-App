@@ -13,7 +13,7 @@
                 <p class="date">Date created: {{dateCreated}}</p>
                 <div class="duedate">
                     <input type="datetime-local" id="dueDate" name="dueDate" [(ngModel)]="dueDate" data-tooltip="Add due date">
-                    <p class="myDueDate">{{ dueDate ? dueDate : 'None' }}</p>
+                    <p class="myDueDate">{{ dueDate ? dueDate : 'No Due date' }}</p>
                 </div>
             </div>
             <textarea class="description" type="text" id="description" name="description" [(ngModel)]="description" placeholder="Description . . ."> </textarea>

@@ -1,19 +1,17 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { map, Observable, switchMap } from 'rxjs';
 import { LoginResponse, UserRegister } from '../model/User';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CurrentUserServiceService } from './current-user.service';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  apiUrl = "https://todo-app-production-598c.up.railway.app/users/";
+  apiUrl = environment.apiUrl + "users/";
   messageEvent: EventEmitter<string>;
-  /*deleteById(id:number):Observable<TaskLists>{
-    return this.http.delete<TaskLists>(`${this.apiUrl}sql/${id}`);
-  }*/
+
   constructor(public http:HttpClient, public router:Router,public currentUser: CurrentUserServiceService) { }
 
 

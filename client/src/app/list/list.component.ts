@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.css']
+  styleUrl: './../task/task.component.css'
 })
 export class ListComponent implements  OnDestroy {
   dataDTO: TaskListsDTO[] = [];

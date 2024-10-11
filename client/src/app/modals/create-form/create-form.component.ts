@@ -1,11 +1,11 @@
-import { Component,OnDestroy,OnInit } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { TaskService } from '../../services/task.service';
-import { TaskLists } from './../../services/TasksLists';
 import { Router } from '@angular/router';
 import { ITask } from '../../model/Tasks';
 import { CurrentUserServiceService } from '../../services/current-user.service';
 import { map, take } from 'rxjs';
 import { CreateTaskLists } from '../../model/User';
+import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-create-form',
   templateUrl: './create-form.component.html',
@@ -19,6 +19,7 @@ export class CreateFormComponent implements OnInit{
   title="";
   isImportant = false;
   dueDate = "";
+  assetPath = environment.assetPath;
   uid = sessionStorage.getItem('uid');
   now = new Date();
     formattedDate = this.now.getFullYear() + '-' +

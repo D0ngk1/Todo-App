@@ -1,0 +1,8 @@
+.parent {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background-image: url("/assets/todo-list.jpg");
+    background-size: cover;
+    background-position: center;
+}

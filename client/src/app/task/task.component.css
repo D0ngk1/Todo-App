@@ -1,21 +1,24 @@
 main{
-    /*border: solid black;
-    height: 200vw;*/
+
     display: flex;
     flex-wrap: initial;
-    height: auto;
+    height: 100%;
+    width: 100%;
     font-family: sans-serif;
-    
+    background-color: var(--secondary-color);
+}
+*{
+    color: var(--quaternary-color);
 }
 .overview-main{
     width: 100vw;
-    margin-left: 15%;
-    height: auto;
+    height: calc(100vh - 65px);
+    overflow: auto !important;
 }
 h1.type{
-    /*border: solid black; */
     padding-left: 2%;
     margin-top: 5px;
+    color: var(--quaternary-color);
 }
 .task-lists {
     height: fit-content;
@@ -27,7 +30,6 @@ div.add-task-div{
     display: flex;
 
 }
-
 .add-task-btn {
     width: 10%;
     height: 100%;
@@ -35,14 +37,14 @@ div.add-task-div{
     border-radius: 5px;
     border: black solid 1px;
     cursor: pointer;
-
 }
 .item-lists{
     max-height: max-content;
     margin: 10px;
     width: 75vw;
     min-width:1000px;
-    background-color: rgb(227, 204, 174);
+    background-color: var(--primary-color);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     border-radius: 15px;
 }
 .notes {
@@ -66,7 +68,7 @@ div.add-task-div{
     width: 90%;
     height: inherit;
     border-radius: 15px;
-    background-color: rgba(231, 212, 189, 0.603);
+    background-color: rgba(66, 65, 65, 0.603);
 }
 .crossout:before {
     content: " ";
@@ -138,7 +140,7 @@ div.add-task-div{
     display: flex;
     align-items: center;
     height: 30px;
-    background-color: rgb(227, 204, 174);
+    background-color: var(--primary-color);
     border-radius: 15px 15px 3px 3px;
 }
 .notes-header{
@@ -163,7 +165,26 @@ div.add-task-div{
 .complete-div{
     display: flex;
 }
-/*Star checkbox*/
+
+#style-1::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: var(--secondary-color);
+}
+
+#style-1::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: var(--primary-color);
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
+}
 .rate {
     width: max-content;
     height: max-content;
@@ -171,7 +192,7 @@ div.add-task-div{
     margin-bottom: 10px;
   }
   .rate:not(:checked) > input {
-    display: none; /* Hides the input element */
+    display: none; 
   }
   .rate:not(:checked) > label {
     cursor: pointer;

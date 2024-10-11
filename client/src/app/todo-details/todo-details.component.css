@@ -4,15 +4,19 @@
     width: 100vw;
     height: 100vh;
     justify-content: center;
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    left: 0;
+    background-color: rgba(70, 70, 70, 0.3);
     z-index: 4;
+}
+.view-details * {
+  color: black;
 }
 .view-details-bg{
     width: 45rem;
     margin-top: 5%;
-    height: 17rem;
-    background-color: rgb(227, 204, 174);
+    height: 18.5rem;
+    background-color: var(--primary-color);
     border-radius: 15px;
     display: flex;
     justify-content: center;
@@ -44,17 +48,10 @@
 }
 .cancel-fbutton {
   margin-left: 3px;
-    background-color: rgb(237, 150, 115);
-}
-.create-fbutton {
-  margin-right: 3px;
-  background-color: rgb(92, 146, 240);
-}
-.cancel-fbutton {
-    background-color: rgb(237, 150, 115);
+  background-color: var(--quaternary-color);
 }
 .save-fbutton {
-    background-color: rgb(92, 146, 240);
+    background-color: var(--tertiary-color);
 }
 .first-row{
     width: 100%;
@@ -84,9 +81,8 @@
 .second-row{
     display: flex;
     width: 100%;
-    height: max-content;
-    justify-content: center;
-    align-items: center;
+    height: 60px;
+    justify-content: space-evenly;
 }
 #dueDate[data-tooltip]:hover::after {
     display: block;
@@ -101,13 +97,10 @@
 #dueDate{
     width: max-content;
 }
-.date{
-    margin-right: 10px;
-}
+
 .date,.duedate{
     background-color: #ffffff;
     border-radius: 8px;
-    margin-bottom: 8px;
 }
 
 
@@ -115,7 +108,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 10px;
     height: 35px;
     text-align: center;
     font-size: 18px;
@@ -155,10 +147,12 @@
   }
 .duedate{
     display: flex;
-    width: 50%;
+    width: 48%;
+    height: 70%;
 }
 .date{
-    width: 50%;
+    width: 48%;
+    height: 70%;
 }
 /* Input local date time */
 input[type="datetime-local"] {

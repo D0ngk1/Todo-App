@@ -13,7 +13,7 @@ public class CorsConfig {
     public CorsFilter corsFilter() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
-       // config.addAllowedOrigin("http://localhost:4200");  // Allow requests from this origin
+        config.addAllowedOrigin("http://localhost:4200");  // Allow requests from this origin
         config.addAllowedOrigin("https://todo-app-production-598c.up.railway.app");
         config.addAllowedHeader("*");  // Allow all headers
         config.addAllowedMethod("*");  // Allow all HTTP methods (GET, POST, etc.)

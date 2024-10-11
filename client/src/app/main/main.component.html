@@ -1,6 +1,7 @@
 <app-top-navigation></app-top-navigation>
 <div class="main-container">
-    <app-navigation class="navigation"></app-navigation>
+    <div [ngClass]="isSidebarOpen ? 'sidebarClose' : 'sidebarOpen'"><app-navigation></app-navigation></div>
+    
     <div class="content-area">
         <router-outlet></router-outlet>
     </div>

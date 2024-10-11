@@ -1,12 +1,13 @@
-  <!--<app-profile *ngIf="topNav.showProfile"></app-profile>-->
+
 <div class="body-top-nav">
     <div>
         <h2 class="title">To Do</h2>
      </div>
     <div class="wrap">
+        <h3 class="username">Hi {{ username }} !</h3>
         <div class="search">
-           <input type="text" class="searchTerm" placeholder="What are you looking for?" [(ngModel)]="input">
-           <button type="submit" class="searchButton" (click)="search()">
+           <input type="text" class="searchTerm" placeholder="What are you looking for?" [(ngModel)]="input" >
+           <button type="submit" class="searchButton" (click)="search()" [ngStyle]="{'background-image': 'url(' + assetPath + 'search-icon.png)'}">
             <span class="icon-search"></span>
            </button>
         </div>

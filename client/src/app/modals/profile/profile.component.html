@@ -1,13 +1,17 @@
 <div class="parent">
-    <form>
-        <h3>Profile</h3>
+    <div class="form-container">
+        <div class="picture-container" [ngStyle]="{'background-image': 'url(' + assetPath + 'user.png)'}">
+        </div>
+        <form class="profile-form">
+            <h3>Profile</h3>
 
-        <label class="username"for="username">Username</label>
-        <input type="text" id="username" name="username" [(ngModel)]="username">
+            <label class="username"for="username">Username</label>
+            <input type="text" id="username" name="username" [(ngModel)]="username">
 
-        <label for="password">Password</label>
-        <input type="password" name="password" [(ngModel)]="password" placeholder="Password" id="password">
+            <label for="password">Password</label>
+            <input type="password" name="password" [(ngModel)]="password" placeholder="Password" id="password">
 
-        <button class="login-button" (click)="save()">SAVE</button>
-    </form>
+            <button class="login-button" (click)="save()">SAVE</button>
+        </form>
+    </div>
 </div>

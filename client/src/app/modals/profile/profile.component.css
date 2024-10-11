@@ -2,27 +2,54 @@
 .parent {
     width: 100vw;
     height: 100vh;
+    background-color: var(--secondary-color);
 }
 
-form {
-    max-height: 30rem;
-    min-height: 30rem;
-    max-width: 25rem;
-    min-width: 25rem;
-    background-color: rgb(227, 204, 174);
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 35%;
+.form-container{
+    width: max-content;
+    height: max-content;
+    position: fixed;
+    top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 4;
+}
+
+.picture-container{
+    position: fixed;
+    border-radius: 50%;
+    height: 15rem;
+    width: 15rem;
+    top:15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    aspect-ratio: 1 / 1; /* This ensures the button remains square */
+    background-repeat: no-repeat;
+    background-size: 100%; /* Adjust the size of the icon */
+    background-position: center;
+}
+form {
+    max-height: 35rem;
+    min-height: 35rem;
+    max-width: 45rem;
+    min-width: 45rem;
+    background-color: var(--primary-color);
     border-radius: 10px;
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     padding: 50px 35px;
+    margin-top: 30%;
+    margin-bottom: 30%;
+    z-index: 5;
 }
 
-form * {
+h3, label,button{
+    color: white;
+}
+
+form .profile-form * {
     font-family: 'Poppins', sans-serif;
-    color: #ffffff;
     letter-spacing: 0.5px;
     outline: none;
     border: none;
@@ -48,25 +75,23 @@ input {
     height: 50px;
     width: 100%;
     background-color: white;
+    color: var(--primary-color) !important;
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
-}
-
-::placeholder {
-
+    border: 0px;
 }
 
 button.login-button {
     margin-top: 50px;
     width: 100%;
-    background-color: rgb(92, 146, 240); /* Ensure this is set to the desired background color */
-    color: #050505 !important; /* This sets the font color to white and uses !important to override other styles */
+    background-color: rgb(92, 146, 240); /* Ensure this is set to the desired background color */ /* This sets the font color to white and uses !important to override other styles */
     padding: 15px 0;
     font-size: 18px;
     font-weight: 600;
+    border: 0px;
     border-radius: 5px;
     cursor: pointer;
 }

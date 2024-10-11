@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { CurrentUserServiceService } from '../services/current-user.service';
 import { TopNavService } from '../services/top-nav.service';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-top-navigation',
@@ -13,7 +14,8 @@ export class TopNavigationComponent {
               public topNav: TopNavService,
               public router: Router
   ){}
-
+  username = sessionStorage.getItem("users");
+  assetPath = environment.assetPath;
   input : string ="";
   search(){
     if(this.router.url !== '/search'){

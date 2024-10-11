@@ -9,3 +9,10 @@
     overflow: hidden;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+
+:root {
+    --primary-color: #222831;
+    --secondary-color: #31363F;
+    --tertiary-color: #76ABAE;
+    --quaternary-color: #EEEEEE;
+  }

@@ -1,8 +1,4 @@
-<div class="parent">
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
+
     <form>
         <h3>Login Here</h3>
 
@@ -13,10 +9,10 @@
         <input type="password" name="password" [(ngModel)]="loginObj.password" placeholder="Password" id="password">
 
         <button class="login-button" (click)="onLogin()">Log In</button>
-        <button class="register-button" (click)="register()">Register</button>
-        <!--<div class="social">
-            <div class="go"><i class="fab fa-google"></i> Google</div>
-            <div class="fb"><i class="fab fa-facebook"></i> Facebook</div>
-        </div> -->
+
+
+        <div class="register">
+            <p>Don't have an account?</p>
+            <p (click)="register()" class="register-button">SIGN UP NOW</p>
+        </div>
     </form>
-</div>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { TopNavService } from '../../services/top-nav.service';
 import { UserService } from '../../services/user.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-profile',
@@ -9,7 +10,7 @@ import { UserService } from '../../services/user.service';
 })
 export class ProfileComponent {
   constructor(public topNav: TopNavService,public userService: UserService){}
-
+  assetPath = environment.assetPath;
   username = sessionStorage.getItem("users");
   password = "";
   save(){

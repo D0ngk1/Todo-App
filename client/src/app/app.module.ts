@@ -22,16 +22,22 @@ import { TodayComponent } from './today/today.component';
 import { PlansComponent } from './plans/plans.component';
 import { DropdownProfileMenuComponent } from './dropdown-profile-menu/dropdown-profile-menu.component';
 import { SearchComponent } from './search/search.component';
+import { LoginRegisterComponent } from './login-register/login-register.component';
 
 const routes: Routes = [
-  {path: 'login',component:LoginComponent},
-  {path: '',redirectTo:'login',pathMatch:'full'},
-  {path: 'register',component:RegisterComponent},
   {path: 'create/TASK',redirectTo:'task',pathMatch:'full'},
   {path: 'create/LIST',redirectTo:'list',pathMatch:'full'},
   {path: 'create/TODAY',redirectTo:'today',pathMatch:'full'},
   {path: 'create/PLANS',redirectTo:'plans',pathMatch:'full'},
   {path: 'create/IMPORTANT',redirectTo:'important',pathMatch:'full'},
+
+  {path: 'authentication',
+    component:LoginRegisterComponent,
+    children:[
+      {path: 'login', component:LoginComponent , data: { animation: 'LoginPage' }},
+      {path: 'register', component:RegisterComponent , data: { animation: 'RegisterPage' }}
+    ]
+  },
   {
     path: '',
     component: MainComponent,
@@ -46,7 +52,7 @@ const routes: Routes = [
       { path: 'search', component: SearchComponent }
     ]
   },
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: 'authentication/login' }
 ];
 
 
@@ -68,7 +74,8 @@ const routes: Routes = [
     TodayComponent,
     PlansComponent,
     DropdownProfileMenuComponent,
-    SearchComponent
+    SearchComponent,
+    LoginRegisterComponent
   ],
   imports: [
     HttpClientModule,
@@ -83,7 +90,6 @@ const routes: Routes = [
       provide: HTTP_INTERCEPTORS,
       useClass: LogginIncterceptorService,
       multi: true
-
     }
   ],
   bootstrap: [AppComponent]

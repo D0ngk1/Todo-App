@@ -6,15 +6,21 @@
                     <input type="checkbox" id="star" name="rate" [(ngModel)]="isImportant" />
                     <label for="star"></label>
                 </div>
-                <input type="text" class="title" id="title" name="title" [(ngModel)]="title" placeholder="TItle.."> 
-                <div class="description-icon" data-tooltip="Add additional info" (click)="showDescription()" [class.showingDescription] = "isHidden === false"></div>
-                <input type="datetime-local" id="dueDate" name="dueDate" [(ngModel)]="dueDate" data-tooltip="Add due date">
+                <input type="text"  class="title" id="title" name="title" [(ngModel)]="title" placeholder="TItle..">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="33" height="33" viewBox="0 0 48 48" data-tooltip="Add additional info" class="icontainer" (click)="showDescription()" [class.ibackground-active] = "isHidden === false">
+                    <path class="ibackground" fill="#EEEEEE"   d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path><path fill="#76ABAE" d="M22 22h4v11h-4V22zM26.5 16.5c0 1.379-1.121 2.5-2.5 2.5s-2.5-1.121-2.5-2.5S22.621 14 24 14 26.5 15.121 26.5 16.5z"></path>
+                </svg>
+                <!--<div class="description-icon" data-tooltip="Add additional info" (click)="showDescription()" [class.showingDescription] = "isHidden === false"></div>-->
+                <div [ngStyle]="{'background-image': 'url(' + assetPath + 'calendar-icon.svg)'}" class="custom-datetime" >
+                    <input type="datetime-local" id="dueDate" name="dueDate" [(ngModel)]="dueDate" data-tooltip="Add due date">
+                </div>
                 <div class="dueDate" [class.dueDateNotNUll] = "dueDate !== ''" data-tooltip="Due date">{{ dueDate }}</div>
             </div>
+            
             <textarea class="description" type="text" id="description" [hidden]="isHidden" placeholder="Description.." name="description" [(ngModel)]="description"> </textarea>
             <div class="buttons" >
                 <input type="submit" value="add" (click)="add()" class="fbutton create-fbutton">
-                <button (click)="cancel()" *ngIf="taskService.showDialog" class="fbutton cancel-fbutton">Close</button>
+                <button (click)="cancel()" *ngIf="taskService.showDialog" class="fbutton cancel-fbutton">Back</button>
             </div>
         </form> 
     </div>

@@ -3,13 +3,13 @@ import { TaskLists, TaskListsDTO } from './TasksLists';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ApiResponse, ITask } from '../model/Tasks';
-import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 import { CreateTaskLists } from '../model/User';
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  apiUrl = "https://todo-app-production-598c.up.railway.app/api/content/";
+  apiUrl = environment.apiUrl+"api/content/";
   private data: TaskLists[]=[];
   //private selectedData: TaskLists[]=[];
   private filteredData: TaskLists[]=[];

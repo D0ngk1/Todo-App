@@ -7,7 +7,7 @@ import { Subscription, filter } from 'rxjs';
 @Component({
   selector: 'app-important',
   templateUrl: './important.component.html',
-  styleUrl: './important.component.css'
+  styleUrl: './../task/task.component.css'
 })
 export class ImportantComponent implements OnDestroy{
   routerSubscription: Subscription;

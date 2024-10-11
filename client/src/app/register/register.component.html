@@ -1,9 +1,6 @@
-<div class="parent">
-    <div class="background">
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
+
     <form>
+        <button class="back-button" (click)="onBack()"> < Back</button>
         <h3>Register Here</h3>
 
         <label for="username">Username</label>
@@ -13,5 +10,5 @@
         <input type="password" name="password" [(ngModel)]="loginObj.password" placeholder="Password" id="password">
 
         <button class="login-button" (click)="onRegister()">Register</button>
+        
     </form>
-</div>

@@ -2,14 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserRegister } from '../model/User';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './../login/login.component.css'
 })
 export class RegisterComponent {
-
+  private apiUrl = environment.apiUrl;
   constructor(private http: HttpClient,private router: Router){
 
   }
@@ -19,7 +20,7 @@ export class RegisterComponent {
     "password" : ""
   };
   onRegister(){
-    this.http.post('https://todo-app-production-598c.up.railway.app/auth/register',this.loginObj).subscribe({
+    this.http.post(this.apiUrl+'auth/register',this.loginObj).subscribe({
       next:(response) => {
         this.users = response as UserRegister;;
         console.log(this.users.userId);
@@ -29,6 +30,10 @@ export class RegisterComponent {
         alert("Registration error");
       }
     });
+  }
+  
+  onBack(){
+    this.router.navigate(['/authentication/login']);
   }
 }
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { LoginResponse, UserRegister } from '../model/User';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,13 @@ export class CurrentUserServiceService {
   private currentUsers = new BehaviorSubject<UserRegister | null | undefined>(undefined);
   
   constructor(private http: HttpClient, private router: Router) { }
-  
-  public firstLogin = true;
+  private apiUrl = environment.apiUrl;
 
+  public firstLogin = true;
+  
   setCurrentUser(loginObj: any) {
     sessionStorage.clear();
-    this.http.post('https://todo-app-production-598c.up.railway.app/auth/login', loginObj).subscribe({
+    this.http.post(this.apiUrl+'auth/login', loginObj).subscribe({
       next: (response) => {
         const loginResponse = response as LoginResponse;
         this.currentUsers.next(loginResponse.user);

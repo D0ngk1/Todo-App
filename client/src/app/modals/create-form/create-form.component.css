@@ -2,11 +2,23 @@
 .view-details {
     width: 100vw;
     height: 100vh;
+    left: 0;
     justify-content: center;
     display: flex;
     position: absolute;
-    background-color: rgba(112, 112, 112, 0.3);
+    background-color: rgba(255, 255, 255, 0.233);
     z-index: 4;
+}
+.view-details * {
+  color: black;
+}
+.icontainer{
+  border-radius: 50%;
+  margin-left:3px;
+}
+.ibackground-active{
+  padding: 0;
+  border: 2px solid var(--tertiary-color);
 }
 .title{
     height: 2rem;
@@ -40,6 +52,7 @@ form {
     max-width:58rem;
     min-width: 20rem;
     overflow: auto;
+    margin-left: -35px;
     margin-bottom: 10px;
     font-size: medium;
 }
@@ -56,16 +69,18 @@ form {
 }
 .cancel-fbutton {
   margin-left: 3px;
-    background-color: rgb(237, 150, 115);
+    background-color: var(--quaternary-color);
+    cursor: pointer;
 }
 .create-fbutton {
   margin-right: 3px;
-  background-color: rgb(92, 146, 240);
+  background-color: var(--tertiary-color);
+  cursor: pointer;
 }
 .hidden-description{
   height: 8rem;
   width: 80rem;
-  background-color: rgb(227, 204, 174);
+  background-color: var(--primary-color);
   border-radius: 15px;
   display: flex;
   align-items: center;
@@ -113,6 +128,7 @@ form {
 
   
 .showingDescription{
+  border-radius: 50%;
   background-color: rgb(92, 146, 240);
 }
 .rate {
@@ -213,7 +229,7 @@ input[type="datetime-local"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   border: none;
-  background-color: #ffffff00;
+  background-color: transparent;
   border-radius: 4px;
   font-size: 16px;
   width: 250px;
@@ -221,12 +237,18 @@ input[type="datetime-local"] {
 
 input[type="datetime-local"]::-webkit-datetime-edit,
 input[type="datetime-local"]::-webkit-inner-spin-button,
-input[type="datetime-local"]::-webkit-clear-button {
+input[type="datetime-local"]::-webkit-clear-button{
   display: none;
 }
 input[type="datetime-local"]::-webkit-calendar-picker-indicator{
-  font-size: 30px;
+  font-size: 31px;
+  opacity: 0;
+  cursor: pointer;
 }
-input[type="datetime-local"]:focus {
-  outline: none;
+
+.custom-datetime {
+  height: 30px;
+  width: 30px;
+  margin:3px;
 }
+
