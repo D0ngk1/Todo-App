@@ -14,13 +14,13 @@ export class LoginComponent {
     "username" : "",
     "password" : ""
   };
-  loginAuto: any={
+  /*loginAuto: any={
     "username" : "da",
     "password" : "123"
-  };
+  };*/
 
   constructor(private http: HttpClient,private router: Router, private currentUserSer: CurrentUserServiceService){
-    this.currentUserSer.setCurrentUser(this.loginAuto);
+    //this.currentUserSer.setCurrentUser(this.loginAuto);
   }
   /*ngOnInit(): void {
 

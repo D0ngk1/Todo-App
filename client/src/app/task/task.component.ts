@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, numberAttribute } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TaskService } from '../services/task.service';
 import { NavigationEnd, Router } from '@angular/router';
 import { TaskLists, TaskListsDTO } from '../services/TasksLists';
