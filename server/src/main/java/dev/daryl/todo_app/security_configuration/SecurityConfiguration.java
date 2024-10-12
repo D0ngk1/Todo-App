@@ -66,7 +66,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/", "/index.html","/dist/todo-app/browser/**","/dist/**",
                             "/static/**","/auth/**", "/*.js", "/*.css", "/*.ico","/*.png", "/assets/**","/media/**",
-                            "/polyfills-*.js",
+                            "/polyfills-*.js","/*.jpg",
                             "/main-*.js",
                             "/runtime-*.js",
                             "/vendor-*.js").permitAll();
