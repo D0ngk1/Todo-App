@@ -65,7 +65,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/", "/index.html","/dist/todo-app/browser/**","/dist/**",
-                            "/static/**","/auth/**", "/*.js", "/*.css", "/*.ico","/*.png", "/assets/**","/media/**",
+                            "/static/**","/auth/**", "/*.js", "/*.css", "/*.ico","/*.png", "/assets/**","/media/**","/*.svg",
                             "/polyfills-*.js","/*.jpg",
                             "/main-*.js",
                             "/runtime-*.js",

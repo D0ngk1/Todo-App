@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { CurrentUserServiceService } from '../services/current-user.service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-dropdown-profile-menu',
@@ -8,6 +9,7 @@ import { CurrentUserServiceService } from '../services/current-user.service';
 })
 export class DropdownProfileMenuComponent {
   isDropdownOpen = false;
+  assetPath = environment.assetPath;
   constructor(private eRef: ElementRef,
     private currentUserService: CurrentUserServiceService
   ) {}

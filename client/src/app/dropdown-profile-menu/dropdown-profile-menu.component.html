@@ -1,6 +1,6 @@
 <div class="container">
     <div class="button" (click)="toggleDropdown()" >
-    <div class="dropdown" [ngClass]="{'show': isDropdownOpen}">
+    <div class="dropdown" [ngClass]="{'show': isDropdownOpen}" [ngStyle]="{'background-image': 'url(' + assetPath + 'user.png)'}">
             <ul>
                 <li><button routerLink="profile">Profile</button></li>
                 <li><button (click)="logout()">Logout</button></li>

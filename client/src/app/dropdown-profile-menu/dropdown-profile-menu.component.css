@@ -7,7 +7,6 @@
     margin-left: 10px;
     .button{
         border: 2px solid #ccc;
-        background-image: url('/assets/user.png');
         aspect-ratio: 1 / 1; /* This ensures the button remains square */
         background-repeat: no-repeat;
         background-size: 100%; /* Adjust the size of the icon */
